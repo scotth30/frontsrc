@@ -1,0 +1,5 @@
+.list-group-item.selected {
+    background-color: yellow;
+    color: orange;
+    /* Apply any desired highlighting style */
+}

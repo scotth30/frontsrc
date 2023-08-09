@@ -1,0 +1,111 @@
+/* SignUpPage.css */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  padding-top: 20px;
+}
+
+.form-fields-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three columns with equal width */
+  grid-gap: 10px; /* Gap between grid items */
+  max-width: 800px;
+}
+
+/* Add a media query to adjust the form fields on smaller screens */
+@media (max-width: 768px) {
+  .form-fields-container {
+    grid-template-columns: repeat(2, 1fr); /* Two columns on smaller screens */
+  }
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field input {
+  padding: 8px;
+}
+
+.form-field label {
+  font-weight: bold;
+}
+
+.form-field span {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+button[type="submit"] {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+/* Nested grid for the 4x1 layout */
+.form-fields-row:nth-child(3) {
+  display: grid;
+  grid-template-columns: 1.5fr 1.3fr .5fr .7fr;
+  grid-gap: 10px;
+}
+
+/* Adjust the layout for the third row */
+.form-fields-container > .form-fields-row {
+  grid-column: 1 / span 3; /* Span all three columns in the third row starting from the first column */
+}
+
+/* Adjust the layout for the first two rows */
+.form-fields-row:nth-child(-n + 2) {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+}
+
+/* Adjust the layout for the state field */
+.form-fields-container > .form-fields-row > .form-field:nth-child(3) {
+  grid-row: span 1; /* Span 1 row for the state field */
+}
+
+/* Adjust the layout for the last row */
+.form-fields-container > .form-fields-row:last-child {
+  grid-column: 1 / span 3; /* Span all three columns for the last row */
+}
+
+/* Set the height of the Autocomplete dropdown */
+.MuiAutocomplete-popupIndicator {
+  height: 30px; /* Adjust this value to match the height of other text fields */
+}
+
+/* Set the height of the input element inside the Autocomplete */
+.MuiAutocomplete-inputRoot {
+  height: 40px; /* Adjust this value to match the height of other text fields */
+  width: 85px !important;
+}
+
+/* Center the text in the Autocomplete dropdown */
+.MuiAutocomplete-input {
+  text-align: center;
+}
+
+/* Center the text in the Autocomplete input */
+.MuiAutocomplete-option {
+  text-align: center;
+}
+
+.MuiAutocomplete-root .MuiOutlinedInput-root {
+width:fit-content;
+}
+
+
+.css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
+  box-sizing: border-box !important;
+}
