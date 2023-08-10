@@ -1,91 +1,84 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
-import { AuthContext } from '../../context/AuthContext';
-import '../../css/Navbar.css';
-import { getAuth, signOut } from "firebase/auth";
+import React, { useEffect, useState } from 'react';
 
+import { Button, IconButton,  Menu, MenuItem, Box, Hidden } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
+import { auth } from '../../firebaseConfig'; // Correct the path to point to your firebaseConfig.ts file
+import {
+  CustomAppBar,
+  CustomToolbar,
+  NavBrand,
+  NavItem,
+  LogoutButton,
+  LoginButton,
+  SignupButton, CustomSearchTextField, CustomSearchIconButton 
+} from '../../styles/CustomNavbar.styles';
 const CustomNavbar: React.FC = () => {
-  const context = useContext(AuthContext);
-  const auth = getAuth();
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [loggedIn, setLoggedIn] = useState(false);
 
-  const currentUser = context ? context.currentUser : null;
-
-  const logout = () => {
-    signOut(auth).catch((error) => {
-      // An error happened.
-      console.error("Failed to logout:", error);
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setLoggedIn(!!user);
     });
-  }
+    return () => unsubscribe();
+  }, []);
+
+  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
-    <Navbar bg="primary" expand="lg" style={{ color: 'white'}}>
-      {/* Brand name */}
-      <Navbar.Brand as={Link} to="/">
-        Brand Name
-      </Navbar.Brand>
-
-      {/* Navbar toggler button for small screens */}
-      <Navbar.Toggle aria-controls="navbarNav" />
-
-      {/* Navbar menu */}
-      <Navbar.Collapse id="navbarNav" >
-        <Nav className="mx-auto" > {/* "mx-auto" class will center the items */}
-          <Nav.Link as={Link} to="/" style={{ color: 'white' , overflow: 'hidden'}}>
-            Home
-          </Nav.Link>
-          <Nav.Link as={Link} to="/about" style={{ color: 'white' }}>
-            About
-          </Nav.Link>
-          {/* Dropdown Menu */}
-          <NavDropdown title="Features" id="navbarDropdown" style={{ color: 'white' }}>
-            <NavDropdown.Item as={Link} to="/features/feature1" className="black-text">
-              Feature 1
-            </NavDropdown.Item>
-            <NavDropdown.Item as={Link} to="/features/feature2" className="black-text">
-              Feature 2
-            </NavDropdown.Item>
-            <NavDropdown.Item as={Link} to="/features/feature3" className="black-text">
-              Feature 3
-            </NavDropdown.Item>
-          </NavDropdown>
-          <Nav.Link as={Link} to="/pricing" style={{ color: 'white' , overflow: 'hidden'}}>
-            Pricing
-          </Nav.Link>
-          <Nav.Link as={Link} to="/resources" style={{ color: 'white' , overflow: 'hidden'}}>
-            Resources
-          </Nav.Link>
-          <Nav.Link as={Link} to="/contact" style={{ color: 'white', overflow: 'hidden' }}>
-            Contact
-          </Nav.Link>
-        </Nav>
-      </Navbar.Collapse>
-
-      {/* Buttons in the center */}
-      <div className="d-flex justify-content-center" >
-        {currentUser ? (
-          <>
-          
-            {/* Render the SearchBar component when logged in */}
-            
-            <input type="text" placeholder="Search" className="form-control mx-2" />
-            <button className="btn btn-secondary mx-2"  onClick={logout}>
-              Logout
-            </button>
-          </>
-        ) : (
-          <>
-            {/* Render the Login and Signup links when not logged in */}
-            <Link className="btn btn-secondary mx-2" to="/login" style={{ color: 'white'}}>
-              Login
-            </Link>
-            <Link className="btn btn-secondary mx-2" to="/signup" style={{ color: 'white'}}>
-              Signup
-            </Link>
-          </>
-        )}
-      </div>
-    </Navbar>
+    <CustomAppBar position="static">
+      <CustomToolbar>
+        <NavBrand to="/">Hedman Software</NavBrand>
+        <Hidden mdUp>
+          <IconButton edge="start" color="inherit" onClick={handleMenuOpen}>
+            <MenuIcon />
+          </IconButton>
+          <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
+            <MenuItem component={NavItem} to="/">Home</MenuItem>
+            <MenuItem component={NavItem} to="/about">About</MenuItem>
+            <MenuItem component={NavItem} to="/features">Features</MenuItem>
+            <MenuItem component={NavItem} to="/resources">Resources</MenuItem>
+          </Menu>
+        </Hidden>
+        <Box display="flex" justifyContent="space-between" width="100%">
+          <Hidden smDown>
+            <Box display="flex" justifyContent="center" flexGrow={1}>
+              <Button color="inherit" component={NavItem} to="/">Home</Button>
+              <Button color="inherit" component={NavItem} to="/features">Features</Button>
+              <Button color="inherit" component={NavItem} to="/about">About</Button>
+              <Button color="inherit" component={NavItem} to="/resources">Resources</Button>
+            </Box>
+          </Hidden>
+          <Box display="flex">
+            {loggedIn ? (
+              <>
+              <CustomSearchTextField
+                variant="outlined"
+                placeholder="Search..."
+                // Add other desired TextField props
+              />
+              <CustomSearchIconButton>
+                <SearchIcon />
+              </CustomSearchIconButton>
+                <LogoutButton onClick={() => auth.signOut()}>Logout</LogoutButton>
+              </>
+            ) : (
+              <>
+                <LoginButton to="/login">Login</LoginButton>
+                <SignupButton to="/signup">Signup</SignupButton>
+              </>
+            )}
+          </Box>
+        </Box>
+      </CustomToolbar>
+    </CustomAppBar>
   );
 };
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import '../../css/SearchBar.css'; 
+
 import { AuthContext } from '../../context/AuthContext';
 import axios from 'axios';
 
