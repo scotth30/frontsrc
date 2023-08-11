@@ -1,13 +1,13 @@
-import  { useState } from "react";
-import { Configuration, OpenAIApi } from "openai";
-import VITE_Open_AI_Key from "../../OpenApiKey";
+import React from 'react';
+import { Configuration, OpenAIApi } from 'openai';
+import VITE_Open_AI_Key from '../../OpenApiKey';
+import { PictureMain, PictureInput, ResultImagesContainer, ResultImage, NumberInput } from '../../styles/PictureGenerator.styles';
+
 function PictureGenerator() {
-  const [prompt, setPrompt] = useState<string>("");
-  const [result, setResult] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
-  const [placeholder, setPlaceholder] = useState<string>(
-    "Search Bears with Paint Brushes the Starry Night, painted by Vincent Van Gogh.."
-  );
+  const [prompt, setPrompt] = React.useState<string>('');
+  const [results, setResults] = React.useState<string[]>([]);
+  const [loading, setLoading] = React.useState<boolean>(false);
+  const [numberOfPictures, setNumberOfPictures] = React.useState<number>(1);
 
   const configuration = new Configuration({
     apiKey: VITE_Open_AI_Key,
@@ -15,36 +15,31 @@ function PictureGenerator() {
 
   const openai = new OpenAIApi(configuration);
 
-  const generateImage = async () => {
+  const generateImages = async () => {
     if (!prompt) {
-      console.error("Prompt cannot be empty");
+      console.error('Prompt cannot be empty');
       return;
     }
 
-    setPlaceholder(`Search ${prompt}..`);
     setLoading(true);
     try {
       const res = await openai.createImage({
         prompt: prompt,
-        n: 1,
-        size: "512x512",
+        n: numberOfPictures,
+        size: '512x512',
       });
       setLoading(false);
-      const imageUrl = res?.data?.data?.[0]?.url; // Perform null-check here
-      if (imageUrl) {
-        setResult(imageUrl);
-      } else {
-        setResult("");
-      }
+      const imageUrls = (res?.data?.data?.map((image) => image.url) || []).filter(Boolean); // Filter out undefined values
+      setResults(imageUrls as string[]); // Cast to string[] after filtering
     } catch (error: any) {
-      console.error("Error generating image:", error.message);
+      console.error('Error generating image:', error.message);
       setLoading(false);
-      setResult("");
+      setResults([]);
     }
   };
 
   return (
-    <div className="picture-main">
+    <PictureMain>
       {loading ? (
         <>
           <h2>Generating..Please Wait..</h2>
@@ -54,26 +49,27 @@ function PictureGenerator() {
           </div>
         </>
       ) : (
-        <>       
-          <h2>Generate an Image using Open AI API</h2>
-          <textarea
-            className="picture-input"
-            placeholder={placeholder}
+        <>
+          <h2>Generate Images using Open AI API</h2>
+          <PictureInput
+            placeholder={`Search ${prompt}..`}
             onChange={(e) => setPrompt(e.target.value)}
-            rows={10}
-            cols={40}
           />
-          <div></div>
-          <button onClick={generateImage}>Generate an Image</button>
-          <div></div>
-          {result.length > 0 ? (
-            <img className="result-image" src={result} alt="result" />
-          ) : (
-            <></>
-          )}
+          <NumberInput
+            type="number"
+            value={numberOfPictures}
+            onChange={(e) => setNumberOfPictures(Number(e.target.value))}
+            placeholder="Number of Pictures"
+          />
+          <button onClick={generateImages}>Generate Images</button>
+          <ResultImagesContainer>
+            {results.map((result, index) => (
+              <ResultImage key={index} src={result} alt="result" />
+            ))}
+          </ResultImagesContainer>
         </>
       )}
-    </div>
+    </PictureMain>
   );
 }
 

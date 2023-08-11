@@ -9,17 +9,15 @@ import {
   SidebarContainer,
   SearchbarContainer,
   DashboardContainer,
-  DashboardMain, ButtonsContainer
+  DashboardMain,
+  ButtonsContainer,
 } from '../../styles/Dashboard.styles';
 import { AuthContext } from '../../context/AuthContext';
 
-interface DashboardProps {}
-
-const Dashboard: React.FC<DashboardProps> = () => {
+const Dashboard: React.FC = () => {
   const auth = useContext(AuthContext);
   const currentUser = auth ? auth.currentUser : null;
   const navigate = useNavigate();
-
   const [isExpanded, setIsExpanded] = useState(true);
 
   useEffect(() => {
@@ -34,23 +32,24 @@ const Dashboard: React.FC<DashboardProps> = () => {
 
   return (
     <div>
+            <DashboardContainer>
       <SideSearchContainer isExpanded={isExpanded}>
         <SidebarContainer isExpanded={isExpanded}>
           <SideBar setIsExpanded={setIsExpanded} />
         </SidebarContainer>
         <SearchbarContainer>
-          <SearchBar setCurrentView={() => {}} isExpanded={isExpanded} /> {/* Added the isExpanded prop here */}
+          <SearchBar setCurrentView={() => {}} isExpanded={isExpanded} />
         </SearchbarContainer>
         <ButtonsContainer>
           {/* Buttons go here */}
         </ButtonsContainer>
       </SideSearchContainer>
-      <DashboardContainer>
-        <DashboardMain>
+
+      <DashboardMain isExpanded={isExpanded}>
           <Routes>
-            <Route path="/addProject" element={<AddProject />} />
-            <Route path="/generatePicture" element={<PictureGenerator />} />
-          </Routes>
+          <Route path="addProject" element={<AddProject />} /> {/* Removed the leading slash */}
+          <Route path="generatePicture" element={<PictureGenerator />} /> {/* Removed the leading slash */}
+        </Routes>
         </DashboardMain>
       </DashboardContainer>
     </div>

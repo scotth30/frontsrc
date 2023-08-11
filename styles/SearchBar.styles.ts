@@ -3,12 +3,13 @@ import { Button, OutlinedInput } from '@mui/material';
 
 export const SearchbarContainer = styled('div')<{ isExpanded: boolean }>(
   ({ isExpanded }) => ({
-    position: 'fixed',
+    position: 'sticky',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     width: isExpanded ? 'calc(100% - 260px)' : 'calc(100% - 80px)', // Adjust the width based on sidebar
     padding: '10px',
+    marginTop: '-30px',
     boxSizing: 'border-box',
     transition: 'width 0.3s ease-in-out', // Transition effect
   })

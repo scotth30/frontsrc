@@ -5,11 +5,14 @@ import { Link } from 'react-router-dom';
 import { IconButton, TextField } from '@mui/material';
 export const CustomAppBar = styled(AppBar)`
   background-color: #0d6efd;
+  position: sticky;
+  box-shadow: none; // Remove box-shadow
 `;
 
 export const CustomToolbar = styled(Toolbar)`
   display: flex;
   justify-content: space-between;
+  position: sticky;
 `;
 
 export const NavBrand = styled(Link)`

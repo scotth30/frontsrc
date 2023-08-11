@@ -33,7 +33,7 @@ const CustomNavbar: React.FC = () => {
   };
 
   return (
-    <CustomAppBar position="static">
+    <CustomAppBar position="sticky">
       <CustomToolbar>
         <NavBrand to="/">Hedman Software</NavBrand>
         <Hidden mdUp>

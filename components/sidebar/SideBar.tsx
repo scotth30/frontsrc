@@ -1,19 +1,14 @@
-import React, { useState } from 'react'; // Importing useState
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ListItem, ListItemIcon as MuiListItemIcon, ListItemText, ButtonBase } from '@mui/material';
 import { styled } from '@mui/system';
-import ViewListIcon from '@mui/icons-material/ViewList';
 import HomeIcon from '@mui/icons-material/Home';
-import InfoIcon from '@mui/icons-material/Info';
-import WhatshotIcon from '@mui/icons-material/Whatshot';
-import WorkIcon from '@mui/icons-material/Work';
-import ContactsIcon from '@mui/icons-material/Contacts';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PhotoIcon from '@mui/icons-material/Photo';
+import ViewListIcon from '@mui/icons-material/ViewList';
 import { Sidebar, SidebarContainer, ToggleButton, SidebarList } from '../../styles/SideBar.styles';
 
 interface SidebarProps {
-  setIsExpanded: (value: boolean) => void; // This matches the property being passed from Dashboard
+  setIsExpanded?: (value: boolean) => void;
 }
 
 const WhiteListItemIcon = styled(MuiListItemIcon)`
@@ -21,11 +16,11 @@ const WhiteListItemIcon = styled(MuiListItemIcon)`
 `;
 
 const SidebarComponent: React.FC<SidebarProps> = ({ setIsExpanded }) => {
-  const [isExpanded, setIsExpandedLocal] = useState(true); // Local state to handle sidebar expansion
+  const [isExpanded, setIsExpandedLocal] = useState(true);
 
   const handleToggle = () => {
     setIsExpandedLocal(!isExpanded);
-    setIsExpanded(!isExpanded); // Notify the parent about the change
+    setIsExpanded && setIsExpanded(!isExpanded);
   };
 
   return (
@@ -35,22 +30,26 @@ const SidebarComponent: React.FC<SidebarProps> = ({ setIsExpanded }) => {
           <ViewListIcon />
         </ToggleButton>
         <SidebarList>
-          {[
-            { to: "/", icon: <HomeIcon />, text: "Home" },
-            { to: "/about", icon: <InfoIcon />, text: "About" },
-            { to: "/picture", icon: <WhatshotIcon />, text: "Pictures" },
-            { to: "/work", icon: <WorkIcon />, text: "Work" },
-            { to: "/contacts", icon: <ContactsIcon />, text: "Contacts" },
-            { to: "/account", icon: <AccountCircleIcon />, text: "Account" },
-            { to: "/picture-generator", icon: <PhotoIcon />, text: "Picture Generator" }
-          ].map((item, index) => (
-            <ButtonBase component={Link} to={item.to} key={index} sx={{ width: '100%', textAlign: 'left' }}>
-              <ListItem>
-                <WhiteListItemIcon>{item.icon}</WhiteListItemIcon>
-                <ListItemText primary={item.text} />
-              </ListItem>
-            </ButtonBase>
-          ))}
+          <ButtonBase component={Link} to="addProject" sx={{ width: '100%', textAlign: 'left' }}>
+            <ListItem>
+              <WhiteListItemIcon><HomeIcon /></WhiteListItemIcon>
+              <ListItemText primary="Add Project" />
+            </ListItem>
+          </ButtonBase>
+          <ButtonBase component={Link} to="generatePicture" sx={{ width: '100%', textAlign: 'left' }}>
+            <ListItem>
+              <WhiteListItemIcon><PhotoIcon /></WhiteListItemIcon>
+              <ListItemText primary="Picture Generator" />
+            </ListItem>
+          </ButtonBase>
+          {/* Below are the additional links assumed to be in folders with similar names */}
+          <ButtonBase component={Link} to="anotherFolder" sx={{ width: '100%', textAlign: 'left' }}>
+            <ListItem>
+              <WhiteListItemIcon><PhotoIcon /></WhiteListItemIcon> {/* Replace with the appropriate icon */}
+              <ListItemText primary="Another Folder" />
+            </ListItem>
+          </ButtonBase>
+          {/* Add other navigation links as needed */}
         </SidebarList>
       </SidebarContainer>
     </Sidebar>
