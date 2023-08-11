@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider} from '@mui/material/styles';
 import HomePage from './HomePage';
 import SignUpPage from './components/signup/SignUpPage';
 import LoginPage from './components/login/LoginPage';
@@ -8,8 +8,9 @@ import CustomNavbar from './components/navbar/CustomNavbar';
 import Dashboard from './components/dashboard/Dashboard';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PictureGenerator from './components/picture/PictureGenerator';
+import { theme }from './theme';
 
-const theme = createTheme();
+
 
 const App: React.FC = () => {
   return (

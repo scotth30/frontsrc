@@ -1,5 +1,5 @@
 import { styled } from '@mui/system';
-import { Button, Input } from '@mui/material';
+import { Button, OutlinedInput } from '@mui/material';
 
 export const SearchbarContainer = styled('div')<{ isExpanded: boolean }>(
   ({ isExpanded }) => ({
@@ -10,12 +10,19 @@ export const SearchbarContainer = styled('div')<{ isExpanded: boolean }>(
     width: isExpanded ? 'calc(100% - 260px)' : 'calc(100% - 80px)', // Adjust the width based on sidebar
     padding: '10px',
     boxSizing: 'border-box',
+    transition: 'width 0.3s ease-in-out', // Transition effect
   })
 );
 
-export const SearchbarInput = styled(Input)({
+export const SearchbarInput = styled(OutlinedInput)({
   flex: '4', // Flex ratio 4:1
   margin: '10px',
+  '& .MuiOutlinedInput-notchedOutline': {
+    borderColor: 'black', // Sets the outline color to black
+  },
+  '& .MuiOutlinedInput-input::placeholder': {
+    color: 'black', // Sets the placeholder text color to black
+  },
 });
 
 export const ButtonsContainer = styled('div')({

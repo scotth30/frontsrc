@@ -1,19 +1,52 @@
-import { createTheme } from '@mui/system';
+import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
   palette: {
     primary: {
       main: '#0d6efd',
     },
+    text: {
+      primary: '#ffffff', // Sets the primary text color to white
+    },
   },
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
-          padding: '10px 20px',
-          backgroundColor: '#0d6efd', // You can also use theme.palette.primary.main if you want to reference the primary color
           color: '#fff',
-          marginTop: '20px',
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          color: '#fff', // Sets the text color to white for outlined inputs
+          '& .MuiOutlinedInput-notchedOutline': {
+            borderColor: 'white', // Sets the border color for outlined inputs
+          },
+          '& .MuiOutlinedInput-input': {
+            color: '#fff', // Sets the text color to white for outlined inputs
+          },
+          '& .MuiInputLabel-outlined.Mui-focused': {
+            color: '#fff', // Keeps the label color white when focused
+          },
+          '& .MuiPlaceholder-root': {
+            color: 'black', // Sets the placeholder color to black
+          },
+        },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          color: '#fff', // Sets the label color to white
+        },
+      },
+    },
+    MuiAutocomplete: {
+      styleOverrides: {
+        option: {
+          color: 'black', // Sets the text color to black for the dropdown options
         },
       },
     },

@@ -6,7 +6,7 @@ export const ContainerStyle = styled('div')({
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
-  border: '1px solid black',
+  border: '1px solid white',
   borderRadius: '20px',
   padding: '1rem',
   width: '80%',
