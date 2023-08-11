@@ -10,7 +10,7 @@ export const Sidebar = styled('div')<SidebarProps>`
   width: ${(props) => (props.isExpanded ? '250px' : '60px')};
   height: calc(100% - 61px);
   position: fixed;
-  top: 63px;
+  top: 60px;
   left: 0;
   background: #0d6efd;
   overflow-x: hidden;

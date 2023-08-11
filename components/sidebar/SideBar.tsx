@@ -6,6 +6,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import PhotoIcon from '@mui/icons-material/Photo';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import { Sidebar, SidebarContainer, ToggleButton, SidebarList } from '../../styles/SideBar.styles';
+import ListIcon from '@mui/icons-material/List'; // You can choose a different icon
 
 interface SidebarProps {
   setIsExpanded?: (value: boolean) => void;
@@ -49,6 +50,12 @@ const SidebarComponent: React.FC<SidebarProps> = ({ setIsExpanded }) => {
               <ListItemText primary="Another Folder" />
             </ListItem>
           </ButtonBase>
+          <ButtonBase component={Link} to="clientView" sx={{ width: '100%', textAlign: 'left' }}>
+  <ListItem>
+    <WhiteListItemIcon><ListIcon /></WhiteListItemIcon> {/* Replace with your preferred icon */}
+    <ListItemText primary="Client View" />
+  </ListItem>
+</ButtonBase>
           {/* Add other navigation links as needed */}
         </SidebarList>
       </SidebarContainer>
