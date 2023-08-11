@@ -1,12 +1,11 @@
 import { FC, useState } from 'react';
 import { useFormik } from 'formik';
-import { TextField, Container, Typography, Alert, Button } from '@mui/material';
+import { TextField,  Typography, Alert, Button } from '@mui/material';
 import { Autocomplete } from '@mui/material';
 import { validationSchema, createFormData, FormData, stateInitials } from '../../utils/formUtils';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import styles from '../../css/SignUpPage.module.css';
-import { signUpButtonStyles } from '../../theme';
+import { ContainerStyle, ButtonContainerStyle, FormFieldsContainerStyle, FormFieldStyle } from '../../styles/SignUpPage.styles';
 
 const SignUpPage: FC = () => {
   const navigate = useNavigate();
@@ -22,7 +21,7 @@ const SignUpPage: FC = () => {
       setSubmitting(true);
       const { email, password, confirmPassword, ...restOfValues } = values;
       try {
-        const response = await axios.post(backendURL + '/register', { email, password, ...restOfValues }); // Using the backendURL variable here
+        const response = await axios.post(backendURL + '/register', { email, password, ...restOfValues });
         if (response.status === 201 && response.data.token) {
           localStorage.setItem('token', response.data.token);
           navigate('/dashboard');
@@ -38,15 +37,15 @@ const SignUpPage: FC = () => {
   });
 
   return (
-    <Container className="container" maxWidth="sm">
+    <ContainerStyle>
       <Typography variant="h4" align="center">Sign Up</Typography>
       <form onSubmit={formik.handleSubmit}>
         {errorMessage && (
           <Alert severity="error">{errorMessage}</Alert>
         )}
-        <div className="form-fields-container">
+        <FormFieldsContainerStyle>
           {Object.keys(formik.values).map((key) => (
-            <div key={key} className="form-field">
+            <FormFieldStyle key={key}>
               {key !== 'state' ? (
                 <TextField
                   name={key}
@@ -71,14 +70,16 @@ const SignUpPage: FC = () => {
                   )}
                 />
               )}
-            </div>
+            </FormFieldStyle>
           ))}
-        </div>
-        <Button type="submit" variant="contained" color="primary" disabled={formik.isSubmitting} sx={signUpButtonStyles}>
-          Sign Up
-        </Button>
+        </FormFieldsContainerStyle>
+        <ButtonContainerStyle>
+  <Button type="submit" variant="contained" color="primary" disabled={formik.isSubmitting}>
+    Sign Up
+  </Button>
+</ButtonContainerStyle>
       </form>
-    </Container>
+    </ContainerStyle>
   );
 };
 

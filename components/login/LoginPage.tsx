@@ -2,6 +2,9 @@ import React, { useState, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GoogleAuthProvider, FacebookAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { auth } from '../../firebaseConfig';
+import { AlternateEmail } from '@mui/icons-material';
+import { LoginContainer, LoginForm, LoginInput, LoginButton, ErrorText, DividerSection, DividerLine, SocialIcon, SocialButtonsContainer, SocialButton } from '../../styles/LoginPage.styles';
+import { Google, Facebook } from '@mui/icons-material'; // Importing social media icons
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -12,7 +15,7 @@ const LoginPage: React.FC = () => {
 
   const handleEmailPasswordLogin = async (e: FormEvent) => {
     e.preventDefault();
-    try {console.log("Hello");
+    try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log(userCredential.user);
       if (userCredential.user) {
@@ -51,29 +54,35 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div>
+    <LoginContainer>
       <h1>Login Page</h1>
-      <form onSubmit={handleEmailPasswordLogin}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Login</button>
-      </form>
-      {loginError && <p style={{ color: 'red' }}>{loginError}</p>}
-      <div>
-        <button onClick={handleGoogleLogin}>Sign in with Google</button>
-        <button onClick={handleFacebookLogin}>Sign in with Facebook</button>
-      </div>
-    </div>
+      <LoginForm onSubmit={handleEmailPasswordLogin}>
+        <LoginInput type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <LoginInput type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <LoginButton type="submit">Login</LoginButton>
+
+      {loginError && <ErrorText>{loginError}</ErrorText>}
+      <DividerSection>
+  <DividerLine />
+  <SocialIcon>
+    <AlternateEmail />
+  </SocialIcon>
+  <DividerLine />
+</DividerSection>
+      <SocialButtonsContainer>
+        <SocialButton onClick={handleGoogleLogin}>
+          <Google /> {/* Google icon */}
+          Sign in with Google
+        </SocialButton>
+        <SocialButton onClick={handleFacebookLogin}>
+          <Facebook /> {/* Facebook icon */}
+          Sign in with Facebook
+        </SocialButton>
+      </SocialButtonsContainer>
+      </LoginForm>
+
+    </LoginContainer>
+
   );
 };
 

@@ -1,32 +1,48 @@
-import { styled } from '@mui/material/styles';
+import { styled } from '@mui/system';
 
-export const SideSearchContainer = styled('div')({
+export const SideSearchContainer = styled('div')<{
+  isExpanded: boolean;
+}>(({ isExpanded }) => ({
   display: 'flex',
-  flexDirection: 'row', // Align elements horizontally
-  marginTop: '60px', // Add a top margin to align below the navbar
+  flexDirection: 'row',
+  marginTop: '60px',
+  paddingLeft: isExpanded ? '260px' : '80px', // Adjust the padding based on sidebar width
+  transition: '0.3s',
+}));
+
+
+
+export const ButtonsContainer = styled('div')({
+  flex: '0.2', // Buttons take 20% of the remaining space
+  display: 'flex',
+  flexDirection: 'row',
+  gap: '10px',
+  justifyContent: 'flex-end',
 });
+
+// Other styles...
 
 export const SidebarContainer = styled('div')<{
   isExpanded: boolean;
 }>(({ isExpanded }) => ({
-  width: isExpanded ? '250px' : '80px', // Set the width based on expansion
-  transition: '0.3s', // Add a smooth transition
-  flexShrink: 0, // Prevent the sidebar from shrinking
+  width: isExpanded ? '250px' : '80px',
+  transition: '0.3s',
+  flexShrink: 0,
 }));
 
 export const SearchbarContainer = styled('div')({
-  flex: 1, // Occupy the remaining width
-  paddingLeft: '10px', // Add padding to separate from sidebar
+  position: 'fixed',
+  flex: '0.8', // Searchbar takes 80% of the remaining space
 });
 
 export const DashboardContainer = styled('div')({
-  flex: 1, // Occupy the remaining space
+  flex: 1,
 });
 
 export const DashboardMain = styled('div')({
-  alignItems: 'center', // Center items vertically
-  display: 'flex', // Use flexbox layout
-  flexDirection: 'column', // Align items in a column
-  justifyContent: 'center', // Center items horizontally
-  flex: 1, // Occupy the remaining space
+  alignItems: 'center',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  flex: 1,
 });

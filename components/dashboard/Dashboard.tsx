@@ -9,7 +9,7 @@ import {
   SidebarContainer,
   SearchbarContainer,
   DashboardContainer,
-  DashboardMain,
+  DashboardMain, ButtonsContainer
 } from '../../styles/Dashboard.styles';
 import { AuthContext } from '../../context/AuthContext';
 
@@ -34,13 +34,16 @@ const Dashboard: React.FC<DashboardProps> = () => {
 
   return (
     <div>
-      <SideSearchContainer>
+      <SideSearchContainer isExpanded={isExpanded}>
         <SidebarContainer isExpanded={isExpanded}>
           <SideBar setIsExpanded={setIsExpanded} />
         </SidebarContainer>
         <SearchbarContainer>
-          <SearchBar setCurrentView={() => {}} />
+          <SearchBar setCurrentView={() => {}} isExpanded={isExpanded} /> {/* Added the isExpanded prop here */}
         </SearchbarContainer>
+        <ButtonsContainer>
+          {/* Buttons go here */}
+        </ButtonsContainer>
       </SideSearchContainer>
       <DashboardContainer>
         <DashboardMain>
