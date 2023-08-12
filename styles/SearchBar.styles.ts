@@ -11,12 +11,13 @@ export const SearchbarContainer = styled('div')<{ isExpanded: boolean }>(
     padding: '10px',
     boxSizing: 'border-box',
     transition: 'width 0.3s ease-in-out', // Transition effect
+    height: '50px',
   })
 );
 
 export const SearchbarInput = styled(OutlinedInput)({
   flex: '4', // Flex ratio 4:1
-  height: '100%', // Set the height to occupy the full container
+  height: '50px',
   margin: '10px',
   '& .MuiOutlinedInput-notchedOutline': {
     borderColor: 'black', // Sets the outline color to black

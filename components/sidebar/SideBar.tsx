@@ -7,7 +7,7 @@ import PhotoIcon from '@mui/icons-material/Photo';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import { Sidebar, SidebarContainer, ToggleButton, SidebarList } from '../../styles/SideBar.styles';
 import ListIcon from '@mui/icons-material/List'; // You can choose a different icon
-
+import WorkIcon from '@mui/icons-material/Work';
 interface SidebarProps {
   setIsExpanded?: (value: boolean) => void;
 }
@@ -44,10 +44,10 @@ const SidebarComponent: React.FC<SidebarProps> = ({ setIsExpanded }) => {
             </ListItem>
           </ButtonBase>
           {/* Below are the additional links assumed to be in folders with similar names */}
-          <ButtonBase component={Link} to="anotherFolder" sx={{ width: '100%', textAlign: 'left' }}>
+          <ButtonBase component={Link} to="Project" sx={{ width: '100%', textAlign: 'left' }}>
             <ListItem>
-              <WhiteListItemIcon><PhotoIcon /></WhiteListItemIcon> {/* Replace with the appropriate icon */}
-              <ListItemText primary="Another Folder" />
+              <WhiteListItemIcon><WorkIcon /></WhiteListItemIcon> {/* Replace with the appropriate icon */}
+              <ListItemText primary="Projects" />
             </ListItem>
           </ButtonBase>
           <ButtonBase component={Link} to="clientView" sx={{ width: '100%', textAlign: 'left' }}>

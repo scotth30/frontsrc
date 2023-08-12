@@ -5,7 +5,7 @@ import HomePage from './HomePage';
 import SignUpPage from './components/signup/SignUpPage';
 import LoginPage from './components/login/LoginPage';
 import CustomNavbar from './components/navbar/CustomNavbar';
-import Dashboard from './components/dashboard/Dashboard';
+import Dashboard from './views/dashboard/Dashboard';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PictureGenerator from './components/picture/PictureGenerator';
 import { theme }from './theme';

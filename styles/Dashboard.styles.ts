@@ -4,7 +4,6 @@ export const SideSearchContainer = styled('div')<{ isExpanded: boolean }>(
   ({ isExpanded }) => ({
     display: 'flex',
     flexDirection: 'row',
-    marginTop: '10px',
     marginLeft: isExpanded ? '260px' : '80px', // Adjust the padding based on sidebar width
     transition: '0.3s',
     position: 'sticky',
@@ -52,7 +51,7 @@ export const DashboardMain = styled('div')<{ isExpanded: boolean }>(
     position: 'relative',
     overflow: 'hidden',
 
-    paddingTop: '75px !important',
+    paddingTop: '10px !important',
 
   })
 );
