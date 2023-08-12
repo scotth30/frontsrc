@@ -44,14 +44,15 @@ export const DashboardMain = styled('div')<{ isExpanded: boolean }>(
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'flex-end', // Align children to the bottom
     flex: 1,
     width: isExpanded ? 'calc(100% - 260px)' : 'calc(100% - 80px)',
     marginLeft: isExpanded ? '260px' : '80px',
-    paddingTop: '70px', // Padding based on search bar height
-    marginTop: '-60px',
     transition: '0.3s',
     position: 'relative',
     overflow: 'hidden',
+
+    paddingTop: '75px !important',
+
   })
 );

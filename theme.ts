@@ -6,32 +6,34 @@ const theme = createTheme({
       main: '#0d6efd',
     },
     text: {
-      primary: '#ffffff', // Sets the primary text color to white
+      primary: '#fff',
+      secondary: '#000', // Black color for other text areas
     },
   },
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
-          color: '#fff',
+          backgroundColor: '#0d6efd', // Default background color for buttons
+          color: '#fff', // Default text color for buttons
         },
       },
     },
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
-          color: '#fff', // Sets the text color to white for outlined inputs
+          color: '#000', // Black color for text
           '& .MuiOutlinedInput-notchedOutline': {
-            borderColor: 'white', // Sets the border color for outlined inputs
+            borderColor: 'white',
           },
           '& .MuiOutlinedInput-input': {
-            color: '#fff', // Sets the text color to white for outlined inputs
+            color: '#000', // Black color for input text
           },
           '& .MuiInputLabel-outlined.Mui-focused': {
-            color: '#fff', // Keeps the label color white when focused
+            color: '#000', // Black color for label when focused
           },
           '& .MuiPlaceholder-root': {
-            color: 'black', // Sets the placeholder color to black
+            color: '#000', // Black color for placeholders
           },
         },
       },
@@ -39,18 +41,76 @@ const theme = createTheme({
     MuiInputLabel: {
       styleOverrides: {
         root: {
-          color: '#fff', // Sets the label color to white
+          color: '#000', // Black color for labels
         },
       },
     },
     MuiAutocomplete: {
       styleOverrides: {
         option: {
-          color: 'black', // Sets the text color to black for the dropdown options
+          color: '#000', // Black color for dropdown options
         },
       },
     },
-    // Add other component overrides as needed
+    MuiTablePagination: {
+      styleOverrides: {
+        root: {
+          color: '#000', // Black color for table pagination text
+        },
+      },
+    },
+
+    MuiTableSortLabel: {
+      styleOverrides: {
+        root: {
+          color: '#000', // Black color for table sort labels
+          '&.Mui-active': {
+            color: '#000', // Black color for active sort labels (clicked)
+          },
+          '& .MuiButtonBase-root': {
+            color: '#000', // Black color for button base within sort labels
+          },
+          '& .MuiSvgIcon-root': {
+            fill: '#000', // Black color for icon within sort labels
+          },
+        },
+      },
+    },
+    MuiTable: {
+      styleOverrides: {
+        root: {
+          color: '#000',
+          border: '1px solid #fff',
+        },
+      },
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        head: {
+          color: '#000', // Black color for table headers
+          backgroundColor: '#fff',
+        },
+        body: {
+          color: '#000', // Black color for table body text
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundColor: 'fff',
+          color: '#000',
+        },
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#0d6efd',
+          color: '#000',
+        },
+      },
+    },
   },
 });
 

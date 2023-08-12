@@ -1,18 +1,25 @@
 import { FC, useState } from 'react';
 import { useFormik } from 'formik';
-import { TextField,  Typography, Alert, Button } from '@mui/material';
-import { Autocomplete } from '@mui/material';
+import { Typography, Alert, Button } from '@mui/material';
+import Autocomplete from '@mui/material/Autocomplete';
 import { validationSchema, createFormData, FormData, stateInitials } from '../../utils/formUtils';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { ContainerStyle, ButtonContainerStyle, FormFieldsContainerStyle, FormFieldStyle } from '../../styles/SignUpPage.styles';
+import { getAuth, createUserWithEmailAndPassword, getIdToken } from 'firebase/auth'; // Updated import
+import { initializeApp } from 'firebase/app';
+import { ContainerStyle, ButtonContainerStyle, FormFieldsContainerStyle, FormFieldStyle, StyledTextField } from '../../styles/SignUpPage.styles';
+import { firebaseConfig } from '../../firebaseConfig';
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+// Initialize Firebase Authentication
+const auth = getAuth(app);
 
 const SignUpPage: FC = () => {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
   const backendURL = import.meta.env.VITE_REACT_APP_BACKEND_URL;
-  console.log('Backend URL:', import.meta.env.VITE_REACT_APP_BACKEND_URL);
 
   const formik = useFormik({
     initialValues: createFormData(),
@@ -21,7 +28,19 @@ const SignUpPage: FC = () => {
       setSubmitting(true);
       const { email, password, confirmPassword, ...restOfValues } = values;
       try {
-        const response = await axios.post(backendURL + '/register', { email, password, ...restOfValues });
+        // Create user in Firebase
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        // Get the ID token from Firebase
+        const token = await getIdToken(user);
+
+        // Send token and other information to the backend
+        const response = await axios.post(backendURL + '/register', { uid: user.uid, email, password, ...restOfValues }, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
         if (response.status === 201 && response.data.token) {
           localStorage.setItem('token', response.data.token);
           navigate('/dashboard');
@@ -47,7 +66,7 @@ const SignUpPage: FC = () => {
           {Object.keys(formik.values).map((key) => (
             <FormFieldStyle key={key}>
               {key !== 'state' ? (
-                <TextField
+                <StyledTextField
                   name={key}
                   label={key}
                   value={formik.values[key as keyof FormData]}
@@ -62,7 +81,7 @@ const SignUpPage: FC = () => {
                   onBlur={() => formik.setFieldTouched('state')}
                   onChange={(_, newValue) => formik.setFieldValue('state', newValue)}
                   renderInput={(params) => (
-                    <TextField
+                    <StyledTextField
                       {...params}
                       error={formik.touched.state && Boolean(formik.errors.state)}
                       helperText={formik.touched.state && formik.errors.state}
@@ -74,10 +93,8 @@ const SignUpPage: FC = () => {
           ))}
         </FormFieldsContainerStyle>
         <ButtonContainerStyle>
-  <Button type="submit" variant="contained" color="primary" disabled={formik.isSubmitting}>
-    Sign Up
-  </Button>
-</ButtonContainerStyle>
+          <Button type="submit" variant="contained" color="primary" disabled={formik.isSubmitting}>Sign Up</Button>
+        </ButtonContainerStyle>
       </form>
     </ContainerStyle>
   );

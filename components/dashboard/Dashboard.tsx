@@ -45,7 +45,6 @@ const Dashboard: React.FC = () => {
           {/* Buttons go here */}
         </ButtonsContainer>
       </SideSearchContainer>
-
       <DashboardMain isExpanded={isExpanded}>
           <Routes>
           <Route path="addProject" element={<AddProject />} /> {/* Removed the leading slash */}

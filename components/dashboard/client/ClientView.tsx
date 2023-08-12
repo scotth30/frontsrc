@@ -21,6 +21,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 
+
 interface Data {
   address: number;
   email: number;
@@ -109,7 +110,7 @@ const headCells: readonly HeadCell[] = [
     id: 'name',
     numeric: false,
     disablePadding: true,
-    label: 'Name',
+    label: 'Select All',
   },
   {
     id: 'address',
@@ -146,6 +147,7 @@ interface EnhancedTableProps {
   rowCount: number;
 }
 
+
 function EnhancedTableHead(props: EnhancedTableProps) {
   const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } =
     props;
@@ -153,11 +155,10 @@ function EnhancedTableHead(props: EnhancedTableProps) {
     (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
       onRequestSort(event, property);
     };
-
   return (
     <TableHead>
-      <TableRow>
-        <TableCell padding="checkbox">
+      <TableRow sx={{ height: '30px' }}>
+        <TableCell padding="checkbox" sx={{ height: '30px' }}>
           <Checkbox
             color="primary"
             indeterminate={numSelected > 0 && numSelected < rowCount}
@@ -198,20 +199,25 @@ interface EnhancedTableToolbarProps {
   numSelected: number;
 }
 
+
 function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
   const { numSelected } = props;
-
   return (
-    <Toolbar
-      sx={{
-        pl: { sm: 2 },
-        pr: { xs: 1, sm: 1 },
-        ...(numSelected > 0 && {
-          bgcolor: (theme) =>
-            alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
-        }),
-      }}
-    >
+<Toolbar
+  sx={{
+    minHeight: '50px !important', // Shrink the height by 50%
+    pl: { sm: 2 },
+    pr: { xs: 1, sm: 1 },
+    ...(numSelected > 0 && {
+      bgcolor: (theme) =>
+        alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
+    }),
+    // Add specific class targeting if needed
+    '&.css-tcc2ha-MuiToolbar-root': {
+      height: '50%', // Shrink the height by 50% for this specific class
+    },
+  }}
+>
       {numSelected > 0 ? (
         <Typography
           sx={{ flex: '1 1 100%' }}
@@ -228,19 +234,12 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
           id="tableTitle"
           component="div"
         >
-          Nutrition
         </Typography>
       )}
-      {numSelected > 0 ? (
+      {numSelected > 0 && (
         <Tooltip title="Delete">
           <IconButton>
             <DeleteIcon />
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <Tooltip title="Filter list">
-          <IconButton>
-            <FilterListIcon />
           </IconButton>
         </Tooltip>
       )}
@@ -254,7 +253,7 @@ export default function EnhancedTable() {
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
@@ -331,7 +330,7 @@ export default function EnhancedTable() {
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
             size={dense ? 'small' : 'medium'}
-          >
+          >   
             <EnhancedTableHead
               numSelected={selected.length}
               order={order}
@@ -344,7 +343,6 @@ export default function EnhancedTable() {
               {visibleRows.map((row, index) => {
                 const isItemSelected = isSelected(row.name);
                 const labelId = `enhanced-table-checkbox-${index}`;
-
                 return (
                   <TableRow
                     hover
@@ -392,6 +390,16 @@ export default function EnhancedTable() {
             </TableBody>
           </Table>
         </TableContainer>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <FormControlLabel
+        control={<Switch checked={dense} onChange={handleChangeDense} />}
+        label="Dense"
+      />
+              <Tooltip title="Filter list">
+          <IconButton>
+            <FilterListIcon />
+          </IconButton>
+        </Tooltip>
         <TablePagination
           rowsPerPageOptions={[10, 15, 25]}
           component="div"
@@ -401,11 +409,8 @@ export default function EnhancedTable() {
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
+      </Box>
       </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
     </Box>
   );
 }
