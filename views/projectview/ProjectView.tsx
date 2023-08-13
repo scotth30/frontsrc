@@ -27,7 +27,7 @@ const ProjectView: React.FC = () => {
   };
 
   return (
-    <Paper elevation={3} style={{ padding: '16px' }}>
+    <Paper elevation={3} style={{ padding: '5px' }}>
       <Table>
         <TableHead>
           <TableRow>

@@ -19,7 +19,7 @@ const wellData: Well = {
 
 const WellView: React.FC = () => {
   return (
-    <Paper elevation={3} sx={{ padding: '16px', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+    <Paper elevation={3} sx={{ padding: '15px', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
       <Box display="flex" justifyContent="space-between">
         <Typography variant="body1">{`Depth: ${wellData.depth ?? 'Unknown'}`}</Typography>
         <Typography variant="body1">{`Pipe Diameter: ${wellData.pipediameter ?? 'Unknown'}`}</Typography>

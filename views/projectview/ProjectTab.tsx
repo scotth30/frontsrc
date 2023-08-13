@@ -6,15 +6,15 @@ import ServiceReportWrapper from './ServiceReportWrapper';
 
 const ProjectTab: React.FC = () => {
   return (
-    <Box display="flex" flexDirection="column" height="100%"> {/* Added padding to the outer container */}
-      <Box height="30%" paddingBottom="10px"> {/* Added padding to the bottom */}
+    <Box display="flex" flexDirection="column" height="48vh"> {/* Added padding to the outer container */}
+      <Box height="30%" width={'100%'} paddingBottom="5px"> {/* Added padding to the bottom */}
         <ProjectView />
       </Box>
       <Box display="flex" flexDirection="row" height="100%">
-        <Box width="50%" paddingRight="8px" minHeight={'40vh'}> {/* Added padding to the right */}
+        <Box width="30%" paddingRight="5px" minHeight={'49vh'}> {/* Added padding to the right */}
           <WellView />
         </Box>
-        <Box width="50%" paddingLeft="8px" minHeight={'40vh'}> {/* Added padding to the left */}
+        <Box minWidth="70%" paddingLeft="5px" minHeight={'49vh'}> {/* Added padding to the left */}
           <ServiceReportWrapper />
         </Box>
       </Box>

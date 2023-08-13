@@ -5,7 +5,7 @@ import { AddressView } from './AddressView';
 
 const TopBarView: React.FC = () => {
   return (
-    <Paper elevation={3} sx={{ padding: '15px', display: 'flex', justifyContent: 'space-between', width: '100%', height: '100%' }}>
+    <Paper elevation={3} sx={{ padding: '5px', display: 'flex', justifyContent: 'space-between', width: '100%', height: '100%' }}>
       <Box width="45%" height="100%">
         <UsersView />
       </Box>

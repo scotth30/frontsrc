@@ -1,7 +1,6 @@
 // ServiceReportWrapper.tsx
 import * as React from 'react';
-import { Box, Paper, List, ListItem, ListItemText, IconButton } from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Box, Paper, List, ListItemButton, ListItemText, IconButton } from '@mui/material';
 import ServiceReportView from './ServiceReportView';
 
 // Sample interface for ServiceReport data
@@ -37,27 +36,27 @@ const ServiceReportWrapper: React.FC = () => {
   return (
     <Box>
       {selectedReport ? (
-        <Paper elevation={3} style={{ padding: '16px', overflow: 'auto', height: '40vh' }}>
+        <Paper elevation={3} style={{ padding: '5px', overflow: 'auto', height: '49vh' }}>
           <IconButton onClick={handleBack} style={{ position: 'absolute', right: 0 }}>
           </IconButton>
           <ServiceReportView report={selectedReport} onBack={handleBack} />
         </Paper>
       ) : (
-        <Paper elevation={3} style={{ padding: '16px', overflow: 'auto', height: '40vh' }}>
+        <Paper elevation={3} style={{ padding: '5px', overflow: 'auto', height: '49vh' }}>
           <List>
             {reports.map((report, index) => (
-              <ListItem
-                button
+              <ListItemButton
+
                 key={index}
                 onClick={() => setSelectedReport(report)}
                 sx={{
-                  padding: '8px',
-                  marginBottom: '8px',
+                  padding: '4px',
+                  marginBottom: '4px',
                   boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
                 }}
               >
                 <ListItemText primary={`Service Report: ${report.reportdate.toLocaleString()}`} />
-              </ListItem>
+              </ListItemButton>
             ))}
           </List>
         </Paper>

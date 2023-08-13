@@ -11,13 +11,13 @@ export const SearchbarContainer = styled('div')<{ isExpanded: boolean }>(
     padding: '10px',
     boxSizing: 'border-box',
     transition: 'width 0.3s ease-in-out', // Transition effect
-    height: '50px',
+    height: '35px',
   })
 );
 
 export const SearchbarInput = styled(OutlinedInput)({
   flex: '4', // Flex ratio 4:1
-  height: '50px',
+  height: '35px',
   margin: '10px',
   '& .MuiOutlinedInput-notchedOutline': {
     borderColor: 'black', // Sets the outline color to black
@@ -37,7 +37,7 @@ export const ButtonsContainer = styled('div')({
 
 export const StyledButton = styled(Button)({
   background: '#007bff',
-  height: '50px',
+  height: '35px',
   color: '#ffffff',
   '&:hover': {
     background: '#0056b3',
