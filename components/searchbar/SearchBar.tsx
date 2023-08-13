@@ -3,6 +3,7 @@ import { AuthContext } from '../../context/AuthContext';
 import axios from 'axios';
 import { SearchbarContainer, SearchbarInput, ButtonsContainer, StyledButton } from '../../styles/SearchBar.styles';
 import { Paper } from '@mui/material'; // Import Paper from Material UI
+import ContactPhoneRoundedIcon from '@mui/icons-material/ContactPhoneRounded';
 
 interface SearchBarProps {
   setCurrentView: React.Dispatch<React.SetStateAction<string>>;
@@ -57,7 +58,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setCurrentView, isExpanded }) => 
 
   return (
     currentUser ? (
-      <Paper elevation={3} style={{ padding: '16px' }}> {/* Wrapping content inside Paper */}
+      <Paper elevation={3} style={{ padding: '5px' }}> {/* Wrapping content inside Paper */}
         <SearchbarContainer isExpanded={isExpanded}>
           <SearchbarInput
             value={searchQuery}
@@ -65,9 +66,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setCurrentView, isExpanded }) => 
             placeholder="Search..."
           />
           <ButtonsContainer>
-            <StyledButton onClick={() => setCurrentView('addProject')}>Add Project</StyledButton>
-            <StyledButton onClick={() => setCurrentView('addCustomer')}>Add Customer</StyledButton>
-            <StyledButton onClick={() => setCurrentView('addEmployee')}>Add Employee</StyledButton>
+            <StyledButton onClick={() => setCurrentView('addCustomer')}><ContactPhoneRoundedIcon /></StyledButton>
           </ButtonsContainer>
         </SearchbarContainer>
       </Paper>

@@ -18,7 +18,7 @@ export const SearchbarContainer = styled('div')<{ isExpanded: boolean }>(
 export const SearchbarInput = styled(OutlinedInput)({
   flex: '4', // Flex ratio 4:1
   height: '35px',
-  margin: '10px',
+  margin: '5px',
   '& .MuiOutlinedInput-notchedOutline': {
     borderColor: 'black', // Sets the outline color to black
   },
@@ -30,14 +30,14 @@ export const SearchbarInput = styled(OutlinedInput)({
 export const ButtonsContainer = styled('div')({
   display: 'flex',
   flexDirection: 'row',
-  flex: '1', // Flex ratio 4:1
-  gap: '10px',
   justifyContent: 'flex-end',
+  marginLeft: '20px',
 });
 
 export const StyledButton = styled(Button)({
-  background: '#007bff',
-  height: '35px',
+  display: 'flex',
+  background: '#009C00',
+  height: '40px',
   color: '#ffffff',
   '&:hover': {
     background: '#0056b3',

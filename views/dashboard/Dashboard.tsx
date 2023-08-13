@@ -11,7 +11,7 @@ import {
   ButtonsContainer,
 } from '../../styles/Dashboard.styles';
 import { AuthContext } from '../../context/AuthContext';
-import ClientView from '../client/ClientView'; // Adjust the path to the correct location
+import ClientViewWrapper from '../client/ClientViewWrapper'; // Adjust the path to the correct location
 import Project from '../projectview/Project';
 const Dashboard: React.FC = () => {
   const auth = useContext(AuthContext);
@@ -45,7 +45,7 @@ const Dashboard: React.FC = () => {
           <Routes>
           <Route path="addProject" element={<AddProject />} /> {/* Removed the leading slash */}
           <Route path="generatePicture" element={<PictureGenerator />} /> {/* Removed the leading slash */}
-          <Route path="clientView" element={<ClientView />} /> {/* Removed the leading slash */}
+          <Route path="clientView" element={<ClientViewWrapper />} /> {/* Removed the leading slash */}
           <Route path="Project" element={<Project />} />
         </Routes>
         </DashboardMain>
