@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Paper, Box } from '@mui/material';
 import UsersView from './UserInfoView'; // Make sure the import is correct
-import AddressView from './AddressView';
+import { AddressView } from './AddressView';
 
 const TopBarView: React.FC = () => {
   return (

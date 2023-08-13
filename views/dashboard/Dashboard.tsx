@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import SideBar from '../../components/sidebar/SideBar';
-import SearchBar from '../../components/searchbar/SearchBar';
 import AddProject from '../../components/addproject/AddProject';
 import PictureGenerator from '../../components/picture/PictureGenerator';
 import {
   SideSearchContainer,
   SidebarContainer,
-  SearchbarContainer,
   DashboardContainer,
   DashboardMain,
   ButtonsContainer,

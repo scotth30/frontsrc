@@ -10,7 +10,7 @@ interface Address {
   zip: number;
 }
 
-const AddressView: React.FC = () => {
+export const AddressView: React.FC = () => {
   // Test data
   const addressData: Address = {
     street: '123 Main St',
@@ -19,20 +19,17 @@ const AddressView: React.FC = () => {
     zip: 62701,
   };
 
-  const renderCell = (value: number | string | null | undefined) => {
-    return value !== undefined && value !== null ? value : <Typography variant="body2" color="textSecondary">Unknown</Typography>;
-  };
+
 
   return (
     <>
-      <Typography variant="body1">{renderCell(addressData.street)}</Typography>
-      <Typography variant="body2">{renderCell(addressData.city)}</Typography>
-      <Typography variant="body2">{renderCell(addressData.state)}</Typography>
-      <Typography variant="body2">{renderCell(addressData.county)}</Typography>
-      <Typography variant="body2">{renderCell(addressData.country)}</Typography>
-      <Typography variant="body2">{renderCell(addressData.zip)}</Typography>
-    </>
+    <Typography variant="body1">{addressData.street}</Typography>
+    <Typography variant="body2">{addressData.city}</Typography>
+    <Typography variant="body2">{addressData.state}</Typography>
+    <Typography variant="body2">{addressData.county}</Typography>
+    <Typography variant="body2">{addressData.country}</Typography>
+    <Typography variant="body2">{addressData.zip}</Typography>
+  </>
   );
 };
 
-export default AddressView;

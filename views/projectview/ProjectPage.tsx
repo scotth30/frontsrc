@@ -20,15 +20,14 @@ const ProjectPage: React.FC = () => {
   };
 
   return (
-    // Set the elevation prop to the desired level (e.g., 3)
-    <Paper elevation={3} > 
+    <Paper elevation={3} style={{ height: '67vh', overflowY: 'auto' }}>
       <Tabs value={selectedTab} onChange={handleChange}>
         <Tab label="Projects" />
         {projects.map((project, index) => (
           <Tab key={index} label={`Project ${index + 1}`} />
         ))}
       </Tabs>
-      <Box p={3} >
+      <Box p={3}>
         <Box hidden={selectedTab !== 0}>
           <div>Projects Content for Testing</div>
         </Box>

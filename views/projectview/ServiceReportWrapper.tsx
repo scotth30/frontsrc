@@ -37,19 +37,30 @@ const ServiceReportWrapper: React.FC = () => {
   return (
     <Box>
       {selectedReport ? (
-        <Paper elevation={3} style={{ padding: '16px', overflow: 'auto' }}>
+        <Paper elevation={3} style={{ padding: '16px', overflow: 'auto', height: '40vh' }}>
           <IconButton onClick={handleBack} style={{ position: 'absolute', right: 0 }}>
           </IconButton>
           <ServiceReportView report={selectedReport} onBack={handleBack} />
         </Paper>
       ) : (
-        <List>
-          {reports.map((report, index) => (
-            <ListItem button key={index} onClick={() => setSelectedReport(report)}>
-              <ListItemText primary={`Service Report: ${report.reportdate.toLocaleString()}`} />
-            </ListItem>
-          ))}
-        </List>
+        <Paper elevation={3} style={{ padding: '16px', overflow: 'auto', height: '40vh' }}>
+          <List>
+            {reports.map((report, index) => (
+              <ListItem
+                button
+                key={index}
+                onClick={() => setSelectedReport(report)}
+                sx={{
+                  padding: '8px',
+                  marginBottom: '8px',
+                  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                }}
+              >
+                <ListItemText primary={`Service Report: ${report.reportdate.toLocaleString()}`} />
+              </ListItem>
+            ))}
+          </List>
+        </Paper>
       )}
     </Box>
   );

@@ -14,7 +14,7 @@ export interface ServiceReportViewProps {
 
 const ServiceReportView: React.FC<ServiceReportViewProps> = ({ report, onBack }) => {
   return (
-    <Paper elevation={3} style={{ padding: '16px', overflow: 'auto' }}>
+    <Paper elevation={3} style={{ padding: '16px'}}>
       <IconButton onClick={onBack} style={{ position: 'absolute', top: '70x', right: '70px' }}>
         <ArrowBackIcon />
       </IconButton>

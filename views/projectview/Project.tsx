@@ -1,29 +1,28 @@
-import React, { useState } from 'react'; // Import useState
-import TopBar from './TopBarView'; // Assuming TopBar.tsx includes UserInfoView.tsx and AddressView.tsx
+import React, { useState } from 'react';
+import TopBar from './TopBarView';
 import SearchBar from '../../components/searchbar/SearchBar';
 import ProjectPage from './ProjectPage';
+import Paper from '@mui/material/Paper'; // Import Paper from Material-UI
 
 const Project: React.FC = () => {
-  // Declare a state for the current view and a function to change it
-  const [currentView, setCurrentView] = useState<string>(''); 
-
-  // Declare a state for the SearchBar expanded status
-  const [isExpanded, setIsExpanded] = useState<boolean>(false); 
+  const [currentView, setCurrentView] = useState<string>('');
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   // TODO: Utilize currentView and setIsExpanded as per project requirements
 
   return (
-    <div style={{  width: '100%', height: '100%' }}>
+    // Wrap the entire component in a Paper element to give a boxed appearance
+    <Paper style={{ width: '100%', height: '100%' }}> 
       <div style={{ padding: '5px', paddingRight: '15px', width: '100%', height: '20%' }}>
         <TopBar />
       </div>
       <div style={{ paddingBottom: '5px', paddingLeft: '5px', paddingRight: '15px', width: '100%', height: '5%' }}>
-        <SearchBar setCurrentView={setCurrentView} isExpanded={isExpanded} /> {/* Pass the props here */}
+        <SearchBar setCurrentView={setCurrentView} isExpanded={isExpanded} />
       </div>
       <div style={{ padding: '5px', paddingRight: '15px', paddingLeft: '5px', width: '100%', height: '75%' }}>
         <ProjectPage />
       </div>
-    </div>
+    </Paper>
   );
 };
 
