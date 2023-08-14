@@ -1,4 +1,5 @@
 import React from 'react';
+import { Radio, RadioGroup, FormControlLabel, FormControl, TextField } from '@mui/material';
 import { FormState, ServiceRecord } from '../addcustomer/interfaces';
 
 interface Props {
@@ -7,35 +8,46 @@ interface Props {
 }
 
 const WellActivity: React.FC<Props> = ({ formState, setFormState }) => {
-  const handleActivityChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, field: keyof ServiceRecord) => {
-    setFormState(prevState => ({
+  const handleActivityChange = (e: React.ChangeEvent<HTMLInputElement>, field: keyof ServiceRecord) => {
+    setFormState((prevState) => ({
       ...prevState,
       servicereport: {
         ...prevState.servicereport,
-        [field]: e.target.value
-      }
+        [field]: e.target.value,
+      },
+    }));
+  };
+
+  const handleServiceReportChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormState((prevState) => ({
+      ...prevState,
+      servicereport: {
+        ...prevState.servicereport,
+        report: e.target.value,
+      },
     }));
   };
 
   return (
-    <div>
-      <input 
-        type="radio" 
-        name="wellActivity" 
-        value="service"
-        checked={formState.servicereport.activitytype === 'service'}
+    <FormControl component="fieldset">
+      <RadioGroup
+        name="wellActivity"
+        value={formState.servicereport.activitytype}
         onChange={(e) => handleActivityChange(e, 'activitytype')}
+      >
+        <FormControlLabel value="service" control={<Radio />} label="Service" />
+        <FormControlLabel value="installation" control={<Radio />} label="Installation" />
+      </RadioGroup>
+      <TextField
+        label="Service Report"
+        multiline
+        rows={4}
+        value={formState.servicereport.details}
+        onChange={handleServiceReportChange}
+        variant="outlined"
+        fullWidth
       />
-      <label>Service</label>
-      <input 
-        type="radio" 
-        name="wellActivity" 
-        value="installation"
-        checked={formState.servicereport.activitytype === 'installation'}
-        onChange={(e) => handleActivityChange(e, 'activitytype')}
-      />
-      <label>Installation</label>
-    </div>
+    </FormControl>
   );
 };
 

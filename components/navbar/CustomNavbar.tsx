@@ -1,18 +1,10 @@
 import React, { useEffect, useState } from 'react';
-
-import { Button, IconButton,  Menu, MenuItem, Box, Hidden } from '@mui/material';
+import { Button, IconButton, Menu, MenuItem, Box, Hidden, AppBar, Toolbar, TextField } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import { auth } from '../../firebaseConfig'; // Correct the path to point to your firebaseConfig.ts file
-import {
-  CustomAppBar,
-  CustomToolbar,
-  NavBrand,
-  NavItem,
-  LogoutButton,
-  LoginButton,
-  SignupButton, CustomSearchTextField, CustomSearchIconButton 
-} from '../../styles/CustomNavbar.styles';
+import { Link } from 'react-router-dom';
+
 const CustomNavbar: React.FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [loggedIn, setLoggedIn] = useState(false);
@@ -33,52 +25,54 @@ const CustomNavbar: React.FC = () => {
   };
 
   return (
-    <CustomAppBar position="sticky">
-      <CustomToolbar>
-        <NavBrand to="/">Hedman Software</NavBrand>
+    <AppBar position="sticky" sx={{minHeight: '60px'}}>
+      <Toolbar>
+        <Hidden smDown> {/* This line hides the navbrand for small screens */}
+          <Button component={Link} to="/" color="inherit" sx={{ width: '15%', minHeight: '60px', textAlign: 'left' }}>Hedman Software</Button>
+        </Hidden>
         <Hidden mdUp>
           <IconButton edge="start" color="inherit" onClick={handleMenuOpen}>
             <MenuIcon />
           </IconButton>
           <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
-            <MenuItem component={NavItem} to="/">Home</MenuItem>
-            <MenuItem component={NavItem} to="/about">About</MenuItem>
-            <MenuItem component={NavItem} to="/features">Features</MenuItem>
-            <MenuItem component={NavItem} to="/resources">Resources</MenuItem>
+            <MenuItem component={Link} to="/">Home</MenuItem>
+            <MenuItem component={Link} to="/about">About</MenuItem>
+            <MenuItem component={Link} to="/features">Features</MenuItem>
+            <MenuItem component={Link} to="/resources">Resources</MenuItem>
           </Menu>
         </Hidden>
         <Box display="flex" justifyContent="space-between" width="100%">
           <Hidden smDown>
             <Box display="flex" justifyContent="center" flexGrow={1}>
-              <Button color="inherit" component={NavItem} to="/">Home</Button>
-              <Button color="inherit" component={NavItem} to="/features">Features</Button>
-              <Button color="inherit" component={NavItem} to="/about">About</Button>
-              <Button color="inherit" component={NavItem} to="/resources">Resources</Button>
+              <Button color="inherit" component={Link} to="/">Home</Button>
+              <Button color="inherit" component={Link} to="/features">Features</Button>
+              <Button color="inherit" component={Link} to="/about">About</Button>
+              <Button color="inherit" component={Link} to="/resources">Resources</Button>
             </Box>
           </Hidden>
           <Box display="flex">
             {loggedIn ? (
               <>
-              <CustomSearchTextField
-                variant="outlined"
-                placeholder="Search..."
-                // Add other desired TextField props
-              />
-              <CustomSearchIconButton>
-                <SearchIcon />
-              </CustomSearchIconButton>
-                <LogoutButton onClick={() => auth.signOut()}>Logout</LogoutButton>
+                <TextField
+                  variant="outlined"
+                  placeholder="Search..."
+                  // Add other desired TextField props
+                />
+                <IconButton>
+                  <SearchIcon />
+                </IconButton>
+                <Button onClick={() => auth.signOut()} color="inherit">Logout</Button>
               </>
             ) : (
               <>
-                <LoginButton to="/login">Login</LoginButton>
-                <SignupButton to="/signup">Signup</SignupButton>
+                <Button component={Link} to="/login" color="inherit">Login</Button>
+                <Button component={Link} to="/signup" color="inherit">Signup</Button>
               </>
             )}
           </Box>
         </Box>
-      </CustomToolbar>
-    </CustomAppBar>
+      </Toolbar>
+    </AppBar>
   );
 };
 

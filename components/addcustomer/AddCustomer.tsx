@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FormState, CustomerInfo, Address } from './interfaces';
+import { Container, TextField, Button, Typography, Grid } from '@mui/material';
 
 interface AddCustomerProps {
   formState: FormState;
@@ -10,76 +11,78 @@ const AddCustomer: React.FC<AddCustomerProps> = ({ formState, setFormState }) =>
   const [addingMailingAddress, setAddingMailingAddress] = useState(false);
 
   const handleChange = (field: keyof CustomerInfo, value: string) => {
-    setFormState(prevState => ({
+    setFormState((prevState) => ({
       ...prevState,
       customer: {
         ...prevState.customer,
-        info: { ...prevState.customer.info, [field]: value }
-      }
+        info: { ...prevState.customer.info, [field]: value },
+      },
     }));
   };
 
   const handleAddressChange = (field: keyof Address, value: string, isMailing: boolean) => {
     const addressType = isMailing ? 'mailingaddress' : 'billingaddress';
-    setFormState(prevState => ({
+    setFormState((prevState) => ({
       ...prevState,
       customer: {
         ...prevState.customer,
-        [addressType]: { ...prevState.customer[addressType], [field]: value }
-      }
+        [addressType]: { ...prevState.customer[addressType], [field]: value },
+      },
     }));
   };
 
   return (
-    <form>
-      <div>
-        <h4>Customer Information</h4>
-        {Object.keys(formState.customer.info).map(field => (
-          <label key={field}>
-            {field}:
-            <input
-              type="text"
-              name={field}
+    <Container component="form">
+      <Typography variant="h4">Customer Information</Typography>
+      <Grid container spacing={3}>
+        {Object.keys(formState.customer.info).map((field) => (
+          <Grid item xs={12} sm={4} key={field}>
+            <TextField
+              label={field}
               value={formState.customer.info[field as keyof CustomerInfo] || ''}
-              onChange={e => handleChange(field as keyof CustomerInfo, e.target.value)}
+              onChange={(e) => handleChange(field as keyof CustomerInfo, e.target.value)}
+              fullWidth
             />
-          </label>
+          </Grid>
         ))}
-      </div>
-      <div>
-        <h4>Billing Address</h4>
-        {Object.keys(formState.customer.billingaddress).map(field => (
-          <label key={field}>
-            {field}:
-            <input
-              type="text"
-              name={field}
+      </Grid>
+      <Typography variant="h4">Billing Address</Typography>
+      <Grid container spacing={3}>
+        {Object.keys(formState.customer.billingaddress).map((field) => (
+          <Grid item xs={12} sm={4} key={field}>
+            <TextField
+              label={field}
               value={formState.customer.billingaddress[field as keyof Address] || ''}
-              onChange={e => handleAddressChange(field as keyof Address, e.target.value, false)}
+              onChange={(e) => handleAddressChange(field as keyof Address, e.target.value, false)}
+              fullWidth
             />
-          </label>
+          </Grid>
         ))}
-      </div>
-      <button type="button" onClick={() => setAddingMailingAddress(!addingMailingAddress)}>
+      </Grid>
+      <Button
+        variant="contained"
+        onClick={() => setAddingMailingAddress(!addingMailingAddress)}
+      >
         {addingMailingAddress ? 'Remove Mailing Address' : 'Add Mailing Address'}
-      </button>
+      </Button>
       {addingMailingAddress && (
         <div>
-          <h4>Mailing Address</h4>
-          {Object.keys(formState.customer.mailingaddress).map(field => (
-            <label key={field}>
-              {field}:
-              <input
-                type="text"
-                name={field}
-                value={formState.customer.mailingaddress[field as keyof Address] || ''}
-                onChange={e => handleAddressChange(field as keyof Address, e.target.value, true)}
-              />
-            </label>
-          ))}
+          <Typography variant="h4">Mailing Address</Typography>
+          <Grid container spacing={3}>
+            {Object.keys(formState.customer.mailingaddress).map((field) => (
+              <Grid item xs={12} sm={4} key={field}>
+                <TextField
+                  label={field}
+                  value={formState.customer.mailingaddress[field as keyof Address] || ''}
+                  onChange={(e) => handleAddressChange(field as keyof Address, e.target.value, true)}
+                  fullWidth
+                />
+              </Grid>
+            ))}
+          </Grid>
         </div>
       )}
-    </form>
+    </Container>
   );
 };
 

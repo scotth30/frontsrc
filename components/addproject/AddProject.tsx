@@ -5,12 +5,14 @@ import AddWellLocation from './AddWellLocation';
 import WellActivity from './WellActivity';
 import { FormState } from '../addcustomer/interfaces';
 import { AuthContext } from '../../context/AuthContext';
+import { Container, Button} from '@mui/material';
 
 interface AddProjectProps {}
 
 const AddProject: React.FC<AddProjectProps> = () => {
   const auth = useContext(AuthContext);
   const currentUser = auth ? auth.currentUser : null;
+
 
   const [formState, setFormState] = useState<FormState>({
     customer: {
@@ -109,18 +111,20 @@ const AddProject: React.FC<AddProjectProps> = () => {
   };
 
   return (
-    <div>
+    <Container>
       <AddCustomer formState={formState} setFormState={setFormState} />
       {showSecondCustomer && (
         <AddCustomer formState={formState} setFormState={setFormState} />
       )}
-      <button onClick={() => setShowSecondCustomer(!showSecondCustomer)}>
+      <Button onClick={() => setShowSecondCustomer(!showSecondCustomer)}>
         {showSecondCustomer ? 'Remove Additional Customer' : 'Add Additional Customer'}
-      </button>
+      </Button>
       <AddWellLocation formState={formState} setFormState={setFormState} />
       <WellActivity formState={formState} setFormState={setFormState} />
-      <button onClick={handleSubmit}>Submit</button>
-    </div>
+      <Button variant="contained" color="primary" onClick={handleSubmit}>
+        Submit
+      </Button>
+    </Container>
   );
 };
 

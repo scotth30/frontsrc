@@ -1,12 +1,11 @@
 import { styled } from '@mui/system';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import { IconButton, ButtonBase } from '@mui/material';
 
 interface SidebarProps {
   isExpanded: boolean;
 }
 
-export const Sidebar = styled('div')<SidebarProps>`
+export const Drawer = styled('div')<SidebarProps>`
   width: ${(props) => (props.isExpanded ? '250px' : '60px')};
   height: calc(100% - 61px);
   position: fixed;
@@ -50,9 +49,7 @@ export const StyledButtonBase = styled(ButtonBase)`
   transition: 0.3s;
 `;
 
-export const WhiteListItemIcon = styled(ListItemIcon)`
-  color: white !important;
-`;
+
 
 export const IconStyle = styled('div')`
   color: white;

@@ -1,20 +1,16 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ListItem, ListItemIcon as MuiListItemIcon, ListItemText, ButtonBase } from '@mui/material';
-import { styled } from '@mui/system';
+import { ListItemText, ListItemButton } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import PhotoIcon from '@mui/icons-material/Photo';
 import ViewListIcon from '@mui/icons-material/ViewList';
-import { Sidebar, SidebarContainer, ToggleButton, SidebarList } from '../../styles/SideBar.styles';
-import ListIcon from '@mui/icons-material/List'; // You can choose a different icon
+import { Drawer, SidebarContainer, ToggleButton, SidebarList } from '../../styles/SideBar.styles';
+import ListIcon from '@mui/icons-material/List';
 import WorkIcon from '@mui/icons-material/Work';
+
 interface SidebarProps {
   setIsExpanded?: (value: boolean) => void;
 }
-
-const WhiteListItemIcon = styled(MuiListItemIcon)`
-  color: white;
-`;
 
 const SidebarComponent: React.FC<SidebarProps> = ({ setIsExpanded }) => {
   const [isExpanded, setIsExpandedLocal] = useState(true);
@@ -25,41 +21,32 @@ const SidebarComponent: React.FC<SidebarProps> = ({ setIsExpanded }) => {
   };
 
   return (
-    <Sidebar isExpanded={isExpanded}>
+    <Drawer isExpanded={isExpanded}>
       <SidebarContainer>
         <ToggleButton aria-label="toggle" onClick={handleToggle}>
           <ViewListIcon />
         </ToggleButton>
         <SidebarList>
-          <ButtonBase component={Link} to="addProject" sx={{ width: '100%', textAlign: 'left' }}>
-            <ListItem>
-              <WhiteListItemIcon><HomeIcon /></WhiteListItemIcon>
-              <ListItemText primary="Add Project" />
-            </ListItem>
-          </ButtonBase>
-          <ButtonBase component={Link} to="generatePicture" sx={{ width: '100%', textAlign: 'left' }}>
-            <ListItem>
-              <WhiteListItemIcon><PhotoIcon /></WhiteListItemIcon>
-              <ListItemText primary="Picture Generator" />
-            </ListItem>
-          </ButtonBase>
-          {/* Below are the additional links assumed to be in folders with similar names */}
-          <ButtonBase component={Link} to="Project" sx={{ width: '100%', textAlign: 'left' }}>
-            <ListItem>
-              <WhiteListItemIcon><WorkIcon /></WhiteListItemIcon> {/* Replace with the appropriate icon */}
-              <ListItemText primary="Projects" />
-            </ListItem>
-          </ButtonBase>
-          <ButtonBase component={Link} to="clientView" sx={{ width: '100%', textAlign: 'left' }}>
-  <ListItem>
-    <WhiteListItemIcon><ListIcon /></WhiteListItemIcon> {/* Replace with your preferred icon */}
-    <ListItemText primary="Client View" />
-  </ListItem>
-</ButtonBase>
+          <ListItemButton component={Link} to="addProject" sx={{ width: '100%', textAlign: 'left' }}>
+            <HomeIcon sx={{ marginRight: 5 }} />
+            <ListItemText primary="Add Project" />
+          </ListItemButton>
+          <ListItemButton component={Link} to="generatePicture" sx={{ width: '100%', textAlign: 'left' }}>
+            <PhotoIcon sx={{ marginRight: 5 }} />
+            <ListItemText primary="Picture Generator" />
+          </ListItemButton>
+          <ListItemButton component={Link} to="Project" sx={{ width: '100%', textAlign: 'left' }}>
+            <WorkIcon sx={{ marginRight: 5 }} />
+            <ListItemText primary="Projects" />
+          </ListItemButton>
+          <ListItemButton component={Link} to="clientView" sx={{ width: '100%', textAlign: 'left' }}>
+            <ListIcon sx={{ marginRight: 5 }} />
+            <ListItemText primary="Client View" />
+          </ListItemButton>
           {/* Add other navigation links as needed */}
         </SidebarList>
       </SidebarContainer>
-    </Sidebar>
+    </Drawer>
   );
 };
 
