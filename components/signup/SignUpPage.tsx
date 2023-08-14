@@ -4,7 +4,6 @@ import { Typography, Alert, Button } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
 import { validationSchema, createFormData, FormData, stateInitials } from '../../utils/formUtils';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword, getIdToken } from 'firebase/auth'; // Updated import
 import { initializeApp } from 'firebase/app';
 import { ContainerStyle, ButtonContainerStyle, FormFieldsContainerStyle, FormFieldStyle, StyledTextField } from '../../styles/SignUpPage.styles';
@@ -17,7 +16,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 const SignUpPage: FC = () => {
-  const navigate = useNavigate();
+
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const backendURL = import.meta.env.VITE_REACT_APP_BACKEND_URL;
 
@@ -43,7 +42,6 @@ const SignUpPage: FC = () => {
         });
         if (response.status === 201 && response.data.token) {
           localStorage.setItem('token', response.data.token);
-          navigate('/dashboard');
         } else {
           setErrorMessage(response.data.message || 'Registration failed');
         }
@@ -57,7 +55,7 @@ const SignUpPage: FC = () => {
 
   return (
     <ContainerStyle>
-      <Typography variant="h4" align="center">Sign Up</Typography>
+      <Typography variant="h4" align="center" sx={{ color: 'white' }}>Sign Up</Typography>
       <form onSubmit={formik.handleSubmit}>
         {errorMessage && (
           <Alert severity="error">{errorMessage}</Alert>

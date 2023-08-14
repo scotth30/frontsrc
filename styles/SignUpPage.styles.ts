@@ -16,6 +16,8 @@ export const ContainerStyle = styled('div')({
   top: '50%', // Position it 50% from the top
   left: '50%', // Position it 50% from the left
   transform: 'translate(-50%, -50%)', // Translate it back by 50% of its own width and height
+  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', // Adds a subtle shadow to give the TextField an elevated appearance
+
 });
 
 export const FormFieldsContainerStyle = styled('div')({
@@ -51,12 +53,14 @@ export const FormFieldsContainerStyle = styled('div')({
 
 export const StyledTextField = styled(TextField)({
   width: '100%', // Ensures that the TextField fills the entire width of the grid cell
+  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.4)', // Adds a subtle shadow to give the TextField an elevated appearance
 });
 
 
 export const FormFieldStyle = styled('div')({
   flexGrow: '1', // Make the field flex and fill the available space
   backgroundColor: 'white',
+  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.4)',
 });
 
 export const ButtonContainerStyle = styled('div')({

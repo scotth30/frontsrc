@@ -5,6 +5,9 @@ const theme = createTheme({
     primary: {
       main: '#0d6efd',
     },
+    secondary: {
+      main: '#6c757d',
+    },
     text: {
       primary: '#fff',
       secondary: '#000', // Black color for other text areas
@@ -13,16 +16,33 @@ const theme = createTheme({
   components: {
     MuiButton: {
       styleOverrides: {
-        root: {
-          backgroundColor: '#0d6efd', // Default background color for buttons
+        root: { // Default background color for buttons
           color: '#fff', // Default text color for buttons
+          borderColor: '#fff',
         },
       },
     },
     MuiButtonBase: {
       styleOverrides: {
         root: {
+          borderColor: '#fff',
           colorPrimary: '#fff', // Default text color for buttons
+        },
+      },
+    },
+    MuiTouchRipple: {
+      styleOverrides: {
+        root: {
+          borderColor: '#fff !important',
+        },
+      }
+    },
+    MuiDivider: {
+      styleOverrides: {
+        root: {
+          '&::before, &::after': {
+            backgroundColor: '#fff', // White color for the divider lines
+          },
         },
       },
     },
@@ -200,11 +220,6 @@ const theme = createTheme({
 });
 
 // Define any specific custom styles outside of the theme here
-const signUpButtonStyles = {
-  padding: '10px 20px',
-  backgroundColor: '#0d6efd',
-  color: '#fff',
-  marginTop: '20px',
-};
 
-export { theme, signUpButtonStyles };
+
+export { theme };

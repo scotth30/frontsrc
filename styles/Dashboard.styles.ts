@@ -14,6 +14,8 @@ export const ButtonsContainer = styled('div')({
   flex: '0.2', // Buttons take 20% of the remaining space
   display: 'flex',
   flexDirection: 'row',
+  height: '50px',
+  width: '50px',
   gap: '10px',
   justifyContent: 'flex-end',
 });

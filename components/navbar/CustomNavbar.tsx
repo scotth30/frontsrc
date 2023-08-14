@@ -25,16 +25,16 @@ const CustomNavbar: React.FC = () => {
   };
 
   return (
-    <AppBar position="sticky" sx={{minHeight: '60px'}}>
+    <AppBar position="sticky" sx={{minHeight: '50px'}}>
       <Toolbar>
         <Hidden smDown> {/* This line hides the navbrand for small screens */}
-          <Button component={Link} to="/" color="inherit" sx={{ width: '15%', minHeight: '60px', textAlign: 'left' }}>Hedman Software</Button>
+          <Button component={Link} to="/" color="inherit" sx={{ width: '15%', minHeight: '50px', textAlign: 'left' }}>Hedman Software</Button>
         </Hidden>
         <Hidden mdUp>
-          <IconButton edge="start" color="inherit" onClick={handleMenuOpen}>
+          <IconButton edge="start" color="inherit" onClick={handleMenuOpen} sx={{minHeight: '50px', minWidth: '50px'}}>
             <MenuIcon />
           </IconButton>
-          <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
+          <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose} sx={{minHeight: '50px', minWidth: '50px'}}>
             <MenuItem component={Link} to="/">Home</MenuItem>
             <MenuItem component={Link} to="/about">About</MenuItem>
             <MenuItem component={Link} to="/features">Features</MenuItem>
@@ -44,10 +44,10 @@ const CustomNavbar: React.FC = () => {
         <Box display="flex" justifyContent="space-between" width="100%">
           <Hidden smDown>
             <Box display="flex" justifyContent="center" flexGrow={1}>
-              <Button color="inherit" component={Link} to="/">Home</Button>
-              <Button color="inherit" component={Link} to="/features">Features</Button>
-              <Button color="inherit" component={Link} to="/about">About</Button>
-              <Button color="inherit" component={Link} to="/resources">Resources</Button>
+              <Button color="inherit" component={Link} to="/" sx={{minHeight: '50px', minWidth: '50px'}}>Home</Button>
+              <Button color="inherit" component={Link} to="/features" sx={{minHeight: '50px', minWidth: '50px'}}>Features</Button>
+              <Button color="inherit" component={Link} to="/about" sx={{minHeight: '50px', minWidth: '50px'}}>About</Button>
+              <Button color="inherit" component={Link} to="/resources" sx={{minHeight: '50px', minWidth: '50px'}}>Resources</Button>
             </Box>
           </Hidden>
           <Box display="flex">
@@ -65,8 +65,8 @@ const CustomNavbar: React.FC = () => {
               </>
             ) : (
               <>
-                <Button component={Link} to="/login" color="inherit">Login</Button>
-                <Button component={Link} to="/signup" color="inherit">Signup</Button>
+                <Button component={Link} to="/login" color="inherit" sx={{minHeight: '50px', minWidth: '50px'}}>Login</Button>
+                <Button component={Link} to="/signup" color="inherit" sx={{minHeight: '50px', minWidth: '50px'}}>Signup</Button>
               </>
             )}
           </Box>

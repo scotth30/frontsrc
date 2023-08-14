@@ -36,7 +36,6 @@ const Dashboard: React.FC = () => {
         <SidebarContainer isExpanded={isExpanded}>
           <SideBar setIsExpanded={setIsExpanded} />
         </SidebarContainer>
-
         <ButtonsContainer>
           {/* Buttons go here */}
         </ButtonsContainer>
