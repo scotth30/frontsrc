@@ -4,7 +4,6 @@ export const SideSearchContainer = styled('div')<{ isExpanded: boolean }>(
   ({ isExpanded }) => ({
     display: 'flex',
     flexDirection: 'row',
-    marginLeft: isExpanded ? '260px' : '80px', // Adjust the padding based on sidebar width
     transition: '0.3s',
     position: 'sticky',
   })
@@ -14,7 +13,6 @@ export const ButtonsContainer = styled('div')({
   flex: '0.2', // Buttons take 20% of the remaining space
   display: 'flex',
   flexDirection: 'row',
-  height: '50px',
   width: '50px',
   gap: '10px',
   justifyContent: 'flex-end',
@@ -31,7 +29,7 @@ export const SidebarContainer = styled('div')<{ isExpanded: boolean }>(
 export const SearchbarContainer = styled('div')({
   position: 'sticky',
   
-  flex: 10, // Searchbar takes 80% of the remaining space
+  flex: 1, // Searchbar takes 80% of the remaining space
 });
 
 export const DashboardContainer = styled('div')({
@@ -47,13 +45,10 @@ export const DashboardMain = styled('div')<{ isExpanded: boolean }>(
     flexDirection: 'column',
     justifyContent: 'flex-end', // Align children to the bottom
     flex: 1,
-    width: isExpanded ? 'calc(100% - 260px)' : 'calc(100% - 80px)',
-    marginLeft: isExpanded ? '260px' : '80px',
+    width: isExpanded ? 'calc(100% - 250px)' : 'calc(100% - 80px)',
+    marginLeft: isExpanded ? '250px' : '80px',
     transition: '0.3s',
     position: 'relative',
     overflow: 'hidden',
-
-    paddingTop: '10px !important',
-
   })
 );

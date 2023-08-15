@@ -11,7 +11,7 @@ import {
   ButtonsContainer,
 } from '../../styles/Dashboard.styles';
 import { AuthContext } from '../../context/AuthContext';
-import ClientView from '../client/ClientView'; // Adjust the path to the correct location
+import ClientViewWrapper from '../client/ClientViewWrapper'; // Adjust the path to the correct location
 import Project from '../projectview/Project';
 const Dashboard: React.FC = () => {
   const auth = useContext(AuthContext);
@@ -31,22 +31,23 @@ const Dashboard: React.FC = () => {
 
   return (
     <div>
-            <DashboardContainer>
-      <SideSearchContainer isExpanded={isExpanded}>
-        <SidebarContainer isExpanded={isExpanded}>
-          <SideBar setIsExpanded={setIsExpanded} />
-        </SidebarContainer>
-        <ButtonsContainer>
-          {/* Buttons go here */}
-        </ButtonsContainer>
-      </SideSearchContainer>
-      <DashboardMain isExpanded={isExpanded}>
+      <DashboardContainer>
+        <SideSearchContainer isExpanded={isExpanded}>
+          <SidebarContainer isExpanded={isExpanded}>
+            <SideBar setIsExpanded={setIsExpanded} />
+          </SidebarContainer>
+          <ButtonsContainer>
+            {/* Buttons go here */}
+          </ButtonsContainer>
+        </SideSearchContainer>
+        <DashboardMain isExpanded={isExpanded}>
           <Routes>
-          <Route path="addProject" element={<AddProject />} /> {/* Removed the leading slash */}
-          <Route path="generatePicture" element={<PictureGenerator />} /> {/* Removed the leading slash */}
-          <Route path="clientView" element={<ClientView />} /> {/* Removed the leading slash */}
-          <Route path="Project" element={<Project />} />
-        </Routes>
+            <Route path="/" element={<ClientViewWrapper />} /> {/* Default route */}
+            <Route path="addProject" element={<AddProject />} />
+            <Route path="generatePicture" element={<PictureGenerator />} />
+            <Route path="clientView" element={<ClientViewWrapper />} />
+            <Route path="Project" element={<Project />} />
+          </Routes>
         </DashboardMain>
       </DashboardContainer>
     </div>
@@ -54,3 +55,6 @@ const Dashboard: React.FC = () => {
 };
 
 export default Dashboard;
+
+
+

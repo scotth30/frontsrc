@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Button, IconButton, Menu, MenuItem, Box, Hidden, AppBar, Toolbar, TextField } from '@mui/material';
+import { IconButton, Menu, MenuItem, Box, Hidden, AppBar, Toolbar, TextField, ListItemButton, Button } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import { auth } from '../../firebaseConfig'; // Correct the path to point to your firebaseConfig.ts file
+import { auth } from '../../firebaseConfig';
 import { Link } from 'react-router-dom';
 
 const CustomNavbar: React.FC = () => {
@@ -25,39 +25,46 @@ const CustomNavbar: React.FC = () => {
   };
 
   return (
-    <AppBar position="sticky" sx={{minHeight: '50px'}}>
+    <AppBar position="sticky">
       <Toolbar>
-        <Hidden smDown> {/* This line hides the navbrand for small screens */}
-          <Button component={Link} to="/" color="inherit" sx={{ width: '15%', minHeight: '50px', textAlign: 'left' }}>Hedman Software</Button>
-        </Hidden>
-        <Hidden mdUp>
-          <IconButton edge="start" color="inherit" onClick={handleMenuOpen} sx={{minHeight: '50px', minWidth: '50px'}}>
-            <MenuIcon />
-          </IconButton>
-          <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose} sx={{minHeight: '50px', minWidth: '50px'}}>
-            <MenuItem component={Link} to="/">Home</MenuItem>
-            <MenuItem component={Link} to="/about">About</MenuItem>
-            <MenuItem component={Link} to="/features">Features</MenuItem>
-            <MenuItem component={Link} to="/resources">Resources</MenuItem>
-          </Menu>
-        </Hidden>
         <Box display="flex" justifyContent="space-between" width="100%">
-          <Hidden smDown>
-            <Box display="flex" justifyContent="center" flexGrow={1}>
-              <Button color="inherit" component={Link} to="/" sx={{minHeight: '50px', minWidth: '50px'}}>Home</Button>
-              <Button color="inherit" component={Link} to="/features" sx={{minHeight: '50px', minWidth: '50px'}}>Features</Button>
-              <Button color="inherit" component={Link} to="/about" sx={{minHeight: '50px', minWidth: '50px'}}>About</Button>
-              <Button color="inherit" component={Link} to="/resources" sx={{minHeight: '50px', minWidth: '50px'}}>Resources</Button>
+          <Box display="flex" flexGrow={.07}>
+            <Hidden smDown>
+              {/* Left section */}
+              <ListItemButton component={Link} to="/" color="inherit">
+                Hedman Software
+              </ListItemButton>
+            </Hidden>
+          </Box>
+
+          {/* Center section */}
+          <Box display="flex" justifyContent="center" flexGrow={1}>
+            <Box display="flex" justifyContent="center" alignItems="center">
+              <Hidden mdUp>
+                <IconButton edge="start" color="inherit" onClick={handleMenuOpen}>
+                  <MenuIcon />
+                </IconButton>
+                <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
+                  <MenuItem component={Link} to="/">Home</MenuItem>
+                  <MenuItem component={Link} to="/about">About</MenuItem>
+                  <MenuItem component={Link} to="/features">Features</MenuItem>
+                  <MenuItem component={Link} to="/resources">Resources</MenuItem>
+                </Menu>
+              </Hidden>
+              <Hidden smDown>
+                <ListItemButton component={Link} to="/" color="inherit">Home</ListItemButton>
+                <ListItemButton component={Link} to="/features" color="inherit">Features</ListItemButton>
+                <ListItemButton component={Link} to="/about" color="inherit">About</ListItemButton>
+                <ListItemButton component={Link} to="/resources" color="inherit">Resources</ListItemButton>
+              </Hidden>
             </Box>
-          </Hidden>
-          <Box display="flex">
+          </Box>
+
+          {/* Right section */}
+          <Box display="flex" alignItems= 'center'>
             {loggedIn ? (
               <>
-                <TextField
-                  variant="outlined"
-                  placeholder="Search..."
-                  // Add other desired TextField props
-                />
+                <TextField variant="outlined" placeholder="Search..." />
                 <IconButton>
                   <SearchIcon />
                 </IconButton>

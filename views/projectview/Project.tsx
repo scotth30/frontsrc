@@ -13,13 +13,13 @@ const Project: React.FC = () => {
   return (
     // Wrap the entire component in a Paper element to give a boxed appearance
     <Paper style={{ width: '100%', height: '100%' }}> 
-      <div style={{ padding: '2px', paddingBottom : '5px', paddingRight: '6px', width: '100%', height: '15%' }}>
+      <div style={{ padding: '10px', width: '100%', height: '25%' }}>
         <TopBar />
       </div>
-      <div style={{ paddingBottom: '5px', paddingLeft: '2px', paddingRight: '6px', width: '100%', height: '3%' }}>
+      <div style={{ padding: '5px', paddingRight: '10px', paddingLeft: '10px', width: '100%', height: '5%' }}>
         <SearchBar setCurrentView={setCurrentView} isExpanded={isExpanded} />
       </div>
-      <div style={{ padding: '3px', paddingRight: '6px', paddingLeft: '2px', width: '100%', height: '82%' }}>
+      <div style={{ padding: '10px', width: '100%', height: '70%' }}>
         <ProjectPage />
       </div>
     </Paper>

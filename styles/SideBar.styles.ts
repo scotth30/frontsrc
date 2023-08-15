@@ -6,7 +6,7 @@ interface SidebarProps {
 }
 
 export const Drawer = styled('div')<SidebarProps>`
-  width: ${(props) => (props.isExpanded ? '250px' : '60px')};
+  width: ${(props) => (props.isExpanded ? '250px' : '80px')};
   height: calc(100% - 61px);
   position: fixed;
   top: 60px;
@@ -31,6 +31,9 @@ export const ToggleButton = styled(IconButton)`
   position: absolute;
   top: 8px;
   left: 8px;
+  height: 30px;
+  width: 30px;
+  marginRight: 10px;
 `;
 
 export const SidebarList = styled('div')`
