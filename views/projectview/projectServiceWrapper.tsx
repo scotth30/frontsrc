@@ -1,31 +1,25 @@
-// ServiceReportWrapper.tsx
 import * as React from 'react';
-import { Box, Paper, List, ListItemButton, ListItemText, IconButton } from '@mui/material';
-import ServiceReportView from './ServiceReportView';
+import { Box, Paper, List, ListItemButton, ListItemText } from '@mui/material';
+import ServiceReportView, { ServiceReportViewProps } from './ServiceReportView';
 
-// Sample interface for ServiceReport data
+// Same interface as ServiceReport
 interface ServiceReport {
   activitytype: string;
   reportdate: Date;
   description: string;
 }
 
-const ServiceReportWrapper: React.FC = () => {
+const ProjectServiceWrapper: React.FC = () => {
   const [selectedReport, setSelectedReport] = React.useState<ServiceReport | null>(null);
 
-  // Test data for ServiceReports
+  // Sample data for ServiceReports - you can replace with actual data
   const reports: ServiceReport[] = [
     {
       activitytype: 'Maintenance',
       reportdate: new Date('2023-08-12T10:00:00'),
       description: 'Performed routine maintenance on the main pump...',
     },
-    {
-      activitytype: 'Inspection',
-      reportdate: new Date('2023-08-05T09:00:00'),
-      description: 'Conducted a detailed inspection of the entire system...',
-    },
-    // Add more test reports as needed
+    // Add more reports as needed
   ];
 
   // Function to handle back button click
@@ -36,17 +30,12 @@ const ServiceReportWrapper: React.FC = () => {
   return (
     <Box>
       {selectedReport ? (
-        <Paper elevation={3} style={{ padding: '5px', overflow: 'auto', height: '36vh' }}>
-          <IconButton onClick={handleBack} style={{ position: 'absolute', right: 0 }}>
-          </IconButton>
-          <ServiceReportView report={selectedReport} onBack={handleBack} />
-        </Paper>
+        <ServiceReportView report={selectedReport} onBack={handleBack} />
       ) : (
-        <Paper elevation={3} style={{ padding: '5px', overflow: 'auto', height: '36vh' }}>
+        <Paper elevation={3} style={{ padding: '5px', overflow: 'auto', height: '58vh' }}>
           <List>
             {reports.map((report, index) => (
               <ListItemButton
-
                 key={index}
                 onClick={() => setSelectedReport(report)}
                 sx={{
@@ -65,4 +54,4 @@ const ServiceReportWrapper: React.FC = () => {
   );
 };
 
-export default ServiceReportWrapper;
+export default ProjectServiceWrapper;

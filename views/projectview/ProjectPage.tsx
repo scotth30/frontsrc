@@ -20,7 +20,7 @@ const ProjectPage: React.FC = () => {
   };
 
   return (
-    <Paper elevation={3} style={{ height: '71vh', overflowY: 'auto' }}>
+    <Paper elevation={3} style={{ height: '58vh', overflowY: 'auto' }}>
       <Tabs value={selectedTab} onChange={handleChange}>
         <Tab label="Projects" />
         {projects.map((project, index) => (
