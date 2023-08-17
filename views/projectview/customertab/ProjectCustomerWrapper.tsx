@@ -33,10 +33,20 @@ const ProjectCustomerWrapper: React.FC = () => {
     zip: 67890,
   };
 
+  const handleBack = () => {
+    // Logic for going back, in this case resetting the selected user to null
+    setSelectedUser(null);
+  };
+
   return (
-    <Box sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', padding: '16px' }}>
+    <Box sx={{ width: '100%', height: '58vh', display: 'flex', flexDirection: 'column' }}>
       {selectedUser ? (
-        <SelectedUserViewWrapper userData={selectedUser} billingAddress={billingAddress} mailingAddress={mailingAddress} />
+        <SelectedUserViewWrapper
+          userData={selectedUser}
+          billingAddress={billingAddress}
+          mailingAddress={mailingAddress}
+          onBack={handleBack} // Passing the handleBack function as a prop
+        />
       ) : (
         <Paper elevation={3} sx={{ padding: '5px', overflow: 'auto', flex: '1' }}>
           <List>

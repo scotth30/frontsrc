@@ -18,7 +18,7 @@ const CustomerTabInfoWrapper: React.FC<CustomerTabInfoWrapperProps> = ({
   mailingAddress,
 }) => {
   return (
-    <Box style={{ height: '100%', display: 'flex', flexDirection: 'column', padding: '16px', }}>
+    <Box style={{ height: '100%', display: 'flex', flexDirection: 'column', padding: '16px' }}>
       <Paper elevation={3} style={{ padding: '16px', flex: 1, display: 'flex', flexDirection: 'column' }}>
         <Box sx={{ flex: '1', overflow: 'auto' , minHeight: '17vh'}}>
           <UserView user={userData} />
