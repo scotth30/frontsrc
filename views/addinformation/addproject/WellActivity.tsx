@@ -1,13 +1,10 @@
 import React from 'react';
 import { Radio, RadioGroup, FormControlLabel, FormControl, TextField } from '@mui/material';
-import { FormState, ServiceRecord } from '../addcustomer/interfaces';
+import { ServiceRecord, FormProps } from '../addcustomer/interfaces';
 
-interface Props {
-  formState: FormState;
-  setFormState: React.Dispatch<React.SetStateAction<FormState>>;
-}
 
-const WellActivity: React.FC<Props> = ({ formState, setFormState }) => {
+
+const WellActivity: React.FC<FormProps> = ({ formState, setFormState }) => {
   const handleActivityChange = (e: React.ChangeEvent<HTMLInputElement>, field: keyof ServiceRecord) => {
     setFormState((prevState) => ({
       ...prevState,

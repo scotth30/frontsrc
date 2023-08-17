@@ -12,7 +12,7 @@ import {
 } from '../../styles/Dashboard.styles';
 import { AuthContext } from '../../context/AuthContext';
 import CustomerViewWrapper from '../client/CustomerViewWrapper'; // Adjust the path to the correct location
-import Project from '../projectview/Project';
+import ProjectWithSideBar from '../projectview/ProjectWithSideBar';
 const Dashboard: React.FC = () => {
   const auth = useContext(AuthContext);
   const currentUser = auth ? auth.currentUser : null;
@@ -43,10 +43,9 @@ const Dashboard: React.FC = () => {
         <DashboardMain isExpanded={isExpanded}>
           <Routes>
             <Route path="/" element={<CustomerViewWrapper />} /> {/* Default route */}
-            <Route path="addProject" element={<AddProject />} />
             <Route path="generatePicture" element={<PictureGenerator />} />
             <Route path="customer" element={<CustomerViewWrapper />} />
-            <Route path="Project" element={<Project />} />
+            <Route path="Project" element={<ProjectWithSideBar />} />
           </Routes>
         </DashboardMain>
       </DashboardContainer>

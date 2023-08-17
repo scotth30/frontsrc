@@ -1,13 +1,10 @@
 import React from 'react';
-import { FormState, Address } from '../addcustomer/interfaces';
+import { Address, FormProps } from '../addcustomer/interfaces';
 import { TextField, Grid } from '@mui/material';
+import { IconButton } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-interface Props {
-  formState: FormState;
-  setFormState: React.Dispatch<React.SetStateAction<FormState>>;
-}
-
-const AddWellLocation: React.FC<Props> = ({ formState, setFormState }) => {
+const AddWellLocation: React.FC<FormProps> = ({ formState, setFormState }) => {
   const handleAddressChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     field: keyof Address

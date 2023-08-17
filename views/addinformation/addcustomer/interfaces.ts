@@ -41,3 +41,42 @@ export interface FormState {
   welllocation: Well;
   servicereport: ServiceRecord;
 }
+
+
+export interface FormProps {
+  formState: FormState;
+  setFormState: React.Dispatch<React.SetStateAction<FormState>>;
+  
+}
+
+export const initialCustomerInfo: CustomerInfo = {
+  firstname: '',
+  lastname: '',
+  phonenumber: '',
+  email: '',
+  customertype: '',
+  companyname: '',
+  maincontact: '',
+};
+
+export const initialAddress: Address = {
+  street: '',
+  city: '',
+  state: '',
+  zip: '',
+  country: '',
+  county: '',
+};
+
+export const initialWell: Well = {
+  address: initialAddress,
+  latitude: '',
+  longitude: '',
+  county: '',
+};
+
+export const initialServiceRecord: ServiceRecord = {
+  details: '',
+  activitytype: '',
+};
+

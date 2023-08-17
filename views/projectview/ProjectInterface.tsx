@@ -37,17 +37,17 @@ export interface UserInfo {
   }
   
   // Define Project Information
-  export interface ProjectInfo {
-    projectName?: string;
-    business?: string;
-    completionStatus?: string;
-    startDate?: Date;
-    endDate?: Date;
-    expense?: number;
-    cost?: number;
-    user: UserInfo;
-    address: Address;
-    well: Well;
-    serviceReport: ServiceReport;
-  }
-  
+export interface ProjectInfo {
+  projectName?: string;
+  business?: string;
+  completionStatus?: string;
+  startDate?: Date;
+  endDate?: Date;
+  expense?: number;
+  cost?: number;
+  user: UserInfo;
+  address: Address;
+  well: Well;
+  serviceReport: ServiceReport;
+}
+

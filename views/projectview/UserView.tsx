@@ -8,12 +8,12 @@ interface UserInfoViewProps {
 
 const UsersView: React.FC<UserInfoViewProps> = ({ user }) => {
   return (
-    <Box width="100%" height="100%">
-      <Typography variant="body1">{`${user.firstName} ${user.lastName}`}</Typography> {/* Updated property names */}
-      <Typography variant="body2">{user.email}</Typography>
-      <Typography variant="body2">{user.phoneNumber}</Typography>
-      <Typography variant="body2">{user.userCreationDate ? user.userCreationDate.toLocaleString() : 'Unknown'}</Typography>
-      <Typography variant="body2">{user.userActive ? 'Active' : 'Inactive'}</Typography>
+    <Box width="100%" height="100%" display="flex" flexDirection="column" alignItems="center" justifyContent="center">
+      <Typography variant="body1" textAlign="center">{`${user.firstName} ${user.lastName}`}</Typography> {/* Updated property names */}
+      <Typography variant="body2" textAlign="center">{user.email}</Typography>
+      <Typography variant="body2" textAlign="center">{user.phoneNumber}</Typography>
+      <Typography variant="body2" textAlign="center">{user.userCreationDate ? user.userCreationDate.toLocaleString() : 'Unknown'}</Typography>
+      <Typography variant="body2" textAlign="center">{user.userActive ? 'Active' : 'Inactive'}</Typography>
     </Box>
   );
 };

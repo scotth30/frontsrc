@@ -27,10 +27,6 @@ const SidebarComponent: React.FC<SidebarProps> = ({ setIsExpanded }) => {
           <ViewListIcon />
         </ToggleButton>
         <SidebarList>
-          <ListItemButton component={Link} to="addProject" sx={{ width: '100%', textAlign: 'left' }}>
-            <HomeIcon sx={{ marginRight: 5 }} />
-            <ListItemText primary="Add Project" />
-          </ListItemButton>
           <ListItemButton component={Link} to="generatePicture" sx={{ width: '100%', textAlign: 'left' }}>
             <PhotoIcon sx={{ marginRight: 5 }} />
             <ListItemText primary="Picture Generator" />

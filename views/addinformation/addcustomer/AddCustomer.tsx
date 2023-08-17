@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
-import { FormState, CustomerInfo, Address } from './interfaces';
+import { CustomerInfo, Address, FormProps } from './interfaces';
 import { Container, TextField, Button, Typography, Grid } from '@mui/material';
 
-interface AddCustomerProps {
-  formState: FormState;
-  setFormState: React.Dispatch<React.SetStateAction<FormState>>;
-}
 
-const AddCustomer: React.FC<AddCustomerProps> = ({ formState, setFormState }) => {
+const AddCustomer: React.FC<FormProps> = ({ formState, setFormState }) => {
   const [addingMailingAddress, setAddingMailingAddress] = useState(false);
 
   const handleChange = (field: keyof CustomerInfo, value: string) => {
