@@ -39,9 +39,9 @@ const SidebarComponent: React.FC<SidebarProps> = ({ setIsExpanded }) => {
             <WorkIcon sx={{ marginRight: 5 }} />
             <ListItemText primary="Projects" />
           </ListItemButton>
-          <ListItemButton component={Link} to="clientView" sx={{ width: '100%', textAlign: 'left' }}>
+          <ListItemButton component={Link} to="customer" sx={{ width: '100%', textAlign: 'left' }}>
             <ListIcon sx={{ marginRight: 5 }} />
-            <ListItemText primary="Client View" />
+            <ListItemText primary="Customers" />
           </ListItemButton>
           {/* Add other navigation links as needed */}
         </SidebarList>

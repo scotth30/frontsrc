@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { List, ListItem, ListItemButton, ListItemText, Typography } from '@mui/material';
-import UsersView from './UserInfoView';
-import { Users } from './UserInfoView'; // Adjust the path as needed
+import UsersView from './UserView';
+import { Users } from './UserView'; // Adjust the path as needed
 
 interface OtherCustomerProps {
   otherCustomers?: Array<Users>;

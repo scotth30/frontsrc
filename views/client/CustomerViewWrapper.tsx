@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Box } from '@mui/material';
-import TopBarView from '../../views/projectview/TopBarView';
+import TopBarView from '../projectview/TopBarView';
 import SearchBar from '../../components/searchbar/SearchBar';
-import ClientView from '../../views/client/ClientView';
+import ClientView from './CustomerView';
 
 const ClientViewWrapper: React.FC = () => {
     const [currentView, setCurrentView] = useState<string>('');

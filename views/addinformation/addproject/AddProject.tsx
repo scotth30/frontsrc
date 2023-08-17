@@ -4,7 +4,7 @@ import AddCustomer from '../addcustomer/AddCustomer';
 import AddWellLocation from './AddWellLocation';
 import WellActivity from './WellActivity';
 import { FormState } from '../addcustomer/interfaces';
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from '../../../context/AuthContext';
 import { Container, Button} from '@mui/material';
 
 interface AddProjectProps {}

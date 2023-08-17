@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import SideBar from '../../components/sidebar/SideBar';
-import AddProject from '../../components/addproject/AddProject';
+import AddProject from '../addinformation/addproject/AddProject';
 import PictureGenerator from '../../components/picture/PictureGenerator';
 import {
   SideSearchContainer,
@@ -11,7 +11,7 @@ import {
   ButtonsContainer,
 } from '../../styles/Dashboard.styles';
 import { AuthContext } from '../../context/AuthContext';
-import ClientViewWrapper from '../client/ClientViewWrapper'; // Adjust the path to the correct location
+import CustomerViewWrapper from '../client/CustomerViewWrapper'; // Adjust the path to the correct location
 import Project from '../projectview/Project';
 const Dashboard: React.FC = () => {
   const auth = useContext(AuthContext);
@@ -42,10 +42,10 @@ const Dashboard: React.FC = () => {
         </SideSearchContainer>
         <DashboardMain isExpanded={isExpanded}>
           <Routes>
-            <Route path="/" element={<ClientViewWrapper />} /> {/* Default route */}
+            <Route path="/" element={<CustomerViewWrapper />} /> {/* Default route */}
             <Route path="addProject" element={<AddProject />} />
             <Route path="generatePicture" element={<PictureGenerator />} />
-            <Route path="clientView" element={<ClientViewWrapper />} />
+            <Route path="customer" element={<CustomerViewWrapper />} />
             <Route path="Project" element={<Project />} />
           </Routes>
         </DashboardMain>

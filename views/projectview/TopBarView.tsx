@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Paper, Box, Typography, Divider } from '@mui/material';
-import UsersView from './UserInfoView';
+import UsersView from './UserView';
 import { AddressView } from './AddressView';
 import OtherCustomer from './OtherContact';
-import { Users } from './UserInfoView';
+import { Users } from './UserView';
 
 const user: Users = {
   firstname: 'John',

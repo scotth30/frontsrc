@@ -15,9 +15,9 @@ export interface ServiceReportViewProps {
 const ServiceReportView: React.FC<ServiceReportViewProps> = ({ report, onBack }) => {
   return (
     <Paper elevation={3}>
-      <IconButton onClick={onBack} style={{ position: 'absolute', marginTop: '10px', right: '70px' }}>
-        <ArrowBackIcon />
-      </IconButton>
+<IconButton onClick={onBack} style={{ position: 'absolute', marginTop: '10px', right: '70px' }}>
+  <ArrowBackIcon style={{ color: 'black' }} />
+</IconButton>
       <Table>
         <TableHead>
           <TableRow>
@@ -31,7 +31,7 @@ const ServiceReportView: React.FC<ServiceReportViewProps> = ({ report, onBack })
             <TableCell>{report.activitytype}</TableCell>
             <TableCell>{report.reportdate.toLocaleString()}</TableCell>
             <TableCell>
-              <Typography variant="body2" style={{ whiteSpace: 'pre-line'}}>
+              <Typography variant="body2" style={{ whiteSpace: 'pre-line', height: '25vh' }}>
                 {report.description}
               </Typography>
             </TableCell>

@@ -20,7 +20,7 @@ export const ButtonsContainer = styled('div')({
 
 export const SidebarContainer = styled('div')<{ isExpanded: boolean }>(
   ({ isExpanded }) => ({
-    width: isExpanded ? '250px' : '80px',
+    width: isExpanded ? '250px' : '60px',
     transition: '0.3s',
     flexShrink: 0,
   })
@@ -45,8 +45,8 @@ export const DashboardMain = styled('div')<{ isExpanded: boolean }>(
     flexDirection: 'column',
     justifyContent: 'flex-end', // Align children to the bottom
     flex: 1,
-    width: isExpanded ? 'calc(100% - 250px)' : 'calc(100% - 80px)',
-    marginLeft: isExpanded ? '250px' : '80px',
+    width: isExpanded ? 'calc(100% - 250px)' : 'calc(100% - 60px)',
+    marginLeft: isExpanded ? '250px' : '60px',
     transition: '0.3s',
     position: 'relative',
     overflow: 'hidden',

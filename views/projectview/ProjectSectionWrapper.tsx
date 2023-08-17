@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Paper, Tabs, Tab, Box } from '@mui/material';
 import ProjectPage from './ProjectPage';
-import ProjectCustomerWrapper from './ProjectCustomerWrapper';
+import ProjectCustomerWrapper from './customertab/ProjectCustomerWrapper';
 import ProjectServiceWrapper from './projectServiceWrapper';
 
 const ProjectSectionWrapper: React.FC = () => {
@@ -12,11 +12,11 @@ const ProjectSectionWrapper: React.FC = () => {
   };
 
   return (
-    <Paper elevation={3}>
+    <Paper elevation={3} sx={{ height: '68vh' }}>
       <Tabs value={selectedTab} onChange={handleChange}>
         <Tab label="Projects" />
         <Tab label="Customers" />
-        <Tab label="Service" />
+        <Tab label="Service Reports" />
       </Tabs>
       <Box p={3}>
         <Box hidden={selectedTab !== 0}>

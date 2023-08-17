@@ -6,7 +6,7 @@ interface SidebarProps {
 }
 
 export const Drawer = styled('div')<SidebarProps>`
-  width: ${(props) => (props.isExpanded ? '250px' : '80px')};
+  width: ${(props) => (props.isExpanded ? '250px' : '60px')};
   height: calc(100% - 61px);
   position: fixed;
   top: 60px;
