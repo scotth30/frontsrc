@@ -1,38 +1,28 @@
+// AddProject.tsx
+
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import AddCustomer from '../addcustomer/AddCustomer';
 import AddWellLocation from './AddWellLocation';
 import WellActivity from './WellActivity';
-import {
-  FormState,
-  initialCustomerInfo,
-  initialAddress,
-  initialWell,
-  initialServiceRecord,
-} from '../addcustomer/interfaces';
+import { FormState, initialCustomerInfo, initialAddress, initialWell, initialServiceRecord } from '../addcustomer/interfaces';
 import { AuthContext } from '../../../context/AuthContext';
-import { Container, Button } from '@mui/material';
+import { Container, Grid, Box } from '@mui/material';
+
 
 const AddProject: React.FC = () => {
   const auth = useContext(AuthContext);
   const currentUser = auth ? auth.currentUser : null;
 
   const [formState, setFormState] = useState<FormState>({
-    customer: {
-      info: initialCustomerInfo,
-      billingaddress: initialAddress,
-      mailingaddress: initialAddress,
-    },
-    othercustomer: {
-      info: initialCustomerInfo,
-      billingaddress: initialAddress,
-      mailingaddress: initialAddress,
-    },
+    customer: { info: initialCustomerInfo, billingaddress: initialAddress, mailingaddress: initialAddress },
+    othercustomer: { info: initialCustomerInfo, billingaddress: initialAddress, mailingaddress: initialAddress },
     welllocation: initialWell,
     servicereport: initialServiceRecord,
   });
 
-  const [showSecondCustomer, setShowSecondCustomer] = useState(false);
+
+  const [open, setOpen] = useState(true); // Maintain the state for the modal
 
   const handleSubmit = async () => {
     if (!currentUser) {
@@ -42,33 +32,32 @@ const AddProject: React.FC = () => {
 
     try {
       const idToken = await currentUser.getIdToken();
-      const response = await axios.post(
-        'http://localhost:3000/addProject',
-        formState,
-        { headers: { Authorization: `Bearer ${idToken}` } }
-      );
-
+      const response = await axios.post('http://localhost:3000/addProject', formState, { headers: { Authorization: `Bearer ` } });
       console.log(response.data);
+      setOpen(false); // Close the modal after successful submission
     } catch (error) {
       console.error('Fetch error:', error);
     }
   };
 
+  const handleBackAction = () => {
+    setOpen(false); // Close the modal when the back button is clicked
+  };
+
   return (
-    <Container>
-      <AddCustomer formState={formState} setFormState={setFormState} />
-      {showSecondCustomer && (
-        <AddCustomer formState={formState} setFormState={setFormState} />
-      )}
-      <Button onClick={() => setShowSecondCustomer(!showSecondCustomer)}>
-        {showSecondCustomer ? 'Remove Additional Customer' : 'Add Additional Customer'}
-      </Button>
-      <AddWellLocation formState={formState} setFormState={setFormState} />
-      <WellActivity formState={formState} setFormState={setFormState} />
-      <Button variant="contained" color="primary" onClick={handleSubmit}>
-        Submit
-      </Button>
-    </Container>
+      <Container>
+        <Box>
+          <AddCustomer formState={formState} setFormState={setFormState} />
+          <Grid container spacing={2}>
+            <Grid item xs={9}>
+              <AddWellLocation formState={formState} setFormState={setFormState} />
+            </Grid>
+            <Grid item xs={3}>
+              <WellActivity formState={formState} setFormState={setFormState} />
+            </Grid>
+          </Grid>
+        </Box>
+      </Container>
   );
 };
 
