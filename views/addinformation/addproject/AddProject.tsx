@@ -20,7 +20,7 @@ const AddProject: React.FC = () => {
     welllocation: initialWell,
     servicereport: initialServiceRecord,
   });
-
+  const backendURL = import.meta.env.VITE_REACT_APP_BACKEND_URL;
 
   const [open, setOpen] = useState(true); // Maintain the state for the modal
 
@@ -32,7 +32,7 @@ const AddProject: React.FC = () => {
 
     try {
       const idToken = await currentUser.getIdToken();
-      const response = await axios.post('http://localhost:3000/addProject', formState, { headers: { Authorization: `Bearer ` } });
+      const response = await axios.post(backendURL +'/addProject', formState, { headers: { Authorization: `Bearer ` } });
       console.log(response.data);
       setOpen(false); // Close the modal after successful submission
     } catch (error) {

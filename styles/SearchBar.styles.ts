@@ -7,7 +7,6 @@ export const SearchbarContainer = styled('div')<{ isExpanded: boolean }>(
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-
     padding: '10px',
     boxSizing: 'border-box',
     transition: 'width 0.3s ease-in-out', // Transition effect

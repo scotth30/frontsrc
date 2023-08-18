@@ -4,7 +4,6 @@ export interface Address {
   state: string;
   zip: string;
   country: string;
-  county: string;
 }
 
 export interface CustomerInfo {
@@ -33,6 +32,9 @@ export interface Well {
 export interface ServiceRecord {
   details: string;
   activitytype: string;
+  projectid: string;
+  employeeid: string;
+  wellid: string;
 }
 
 export interface FormState {
@@ -65,7 +67,6 @@ export const initialAddress: Address = {
   state: '',
   zip: '',
   country: '',
-  county: '',
 };
 
 export const initialWell: Well = {
@@ -78,5 +79,8 @@ export const initialWell: Well = {
 export const initialServiceRecord: ServiceRecord = {
   details: '',
   activitytype: '',
+  projectid: '',
+  employeeid: '',
+  wellid: '',
 };
 

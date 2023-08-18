@@ -35,7 +35,7 @@ const AddPart: React.FC<AddPartProps> = ({ onSubmit }) => {
           required
         />
 
-        <label htmlFor="partCost">Part Cost</label>
+<label htmlFor="partCost">Part Cost</label>
         <input 
           id="partCost"
           type="number"
@@ -43,6 +43,7 @@ const AddPart: React.FC<AddPartProps> = ({ onSubmit }) => {
           onChange={(e) => setPartCost(Number(e.target.value))}
           required
         />
+        
 
         <label htmlFor="partSupplier">Part Supplier</label>
         <input 
