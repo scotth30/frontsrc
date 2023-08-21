@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { SearchbarContainer, SearchbarInput, ButtonsContainer, StyledButton } from '../../styles/SearchBar.styles';
 import { Paper } from '@mui/material'; // Import Paper from Material UI
 import ContactPhoneRoundedIcon from '@mui/icons-material/ContactPhoneRounded';
+import { useEffect } from 'react';
 
 interface SearchBarProps {
   setCurrentView: React.Dispatch<React.SetStateAction<string>>;
@@ -12,65 +12,57 @@ interface SearchBarProps {
 
 const SearchBar: React.FC<SearchBarProps> = ({ setCurrentView, isExpanded }) => { // Added isExpanded here
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const auth = useContext(AuthContext);
-  const currentUser = auth ? auth.currentUser : null;
 
-  const searchAddressAPI = async (query: string, authToken: string) => {
+  const searchAddressAPI = async (query: string) => {
     const response = await axios.post('http://localhost:3000/searchAddress',
-      { partialAddress: query },
-      { headers: { Authorization: `Bearer ${authToken}` } }
+      { partialAddress: query }
     );
     console.log(response.data);
   };
 
-  const searchNameAPI = async (query: string, authToken: string) => {
+  const searchNameAPI = async (query: string) => {
     const response = await axios.get('http://localhost:3000/searchName', {
-      params: { name: query },
-      headers: { Authorization: `Bearer ${authToken}` }
+      params: { name: query }
     });
     console.log(response.data);
   };
 
   useEffect(() => {
     const handleSearch = async () => {
-      if (!searchQuery.trim() || !currentUser) {
-        console.log('No search query entered or user not logged in.');
+      if (!searchQuery.trim()) {
+        console.log('No search query entered.');
         return;
       }
 
-      const idToken = await currentUser.getIdToken();
-
       if (/[0-9]/.test(searchQuery.charAt(0))) {
         console.log('Searching for address:', searchQuery);
-        await searchAddressAPI(searchQuery, idToken);
+        await searchAddressAPI(searchQuery);
       } else {
         console.log('Searching for name:', searchQuery);
-        await searchNameAPI(searchQuery, idToken);
+        await searchNameAPI(searchQuery);
       }
     };
 
     handleSearch();
-  }, [searchQuery, currentUser]);
+  }, [searchQuery]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
   };
 
   return (
-    currentUser ? (
-      <Paper elevation={3} style={{ padding: '5px' }}> {/* Wrapping content inside Paper */}
-        <SearchbarContainer isExpanded={isExpanded}>
-          <SearchbarInput
-            value={searchQuery}
-            onChange={handleSearchChange}
-            placeholder="Search..."
-          />
-          <ButtonsContainer>
-            <StyledButton onClick={() => setCurrentView('addCustomer')}><ContactPhoneRoundedIcon /></StyledButton>
-          </ButtonsContainer>
-        </SearchbarContainer>
-      </Paper>
-    ) : null
+    <Paper elevation={3} style={{ padding: '5px' }}> {/* Wrapping content inside Paper */}
+      <SearchbarContainer isExpanded={isExpanded}>
+        <SearchbarInput
+          value={searchQuery}
+          onChange={handleSearchChange}
+          placeholder="Search..."
+        />
+        <ButtonsContainer>
+          <StyledButton onClick={() => setCurrentView('addCustomer')}><ContactPhoneRoundedIcon /></StyledButton>
+        </ButtonsContainer>
+      </SearchbarContainer>
+    </Paper>
   );
 };
 

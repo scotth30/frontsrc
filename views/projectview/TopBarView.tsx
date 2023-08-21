@@ -3,14 +3,15 @@ import { Paper, Box, Typography, Divider } from '@mui/material';
 import UsersView from './UserView';
 import { AddressView } from './AddressView';
 import OtherCustomer from './OtherContact';
-import { Users } from './UserView';
+import { UserInfo } from './ProjectInterface';
 
-const user: Users = {
-  firstname: 'John',
-  lastname: 'Doe',
+const user: UserInfo = {
+  firstName: 'John',
+  lastName: 'Doe',
   email: 'john.doe@example.com',
-  phonenumber: '123-456-7890',
-  useractive: true,
+  phoneNumber: '123-456-7890',
+  userActive: true,
+  userCreationDate: '2023-08-12T10:00:00',
 };
 
 const TopBarView: React.FC = () => {

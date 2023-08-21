@@ -1,20 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { IconButton, Menu, MenuItem, Box, Hidden, AppBar, Toolbar, TextField, ListItemButton, Button } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import { auth } from '../../firebaseConfig';
 import { Link } from 'react-router-dom';
 
 const CustomNavbar: React.FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [loggedIn, setLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setLoggedIn(!!user);
-    });
-    return () => unsubscribe();
-  }, []);
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -68,7 +60,8 @@ const CustomNavbar: React.FC = () => {
                 <IconButton>
                   <SearchIcon />
                 </IconButton>
-                <Button onClick={() => auth.signOut()} color="inherit">Logout</Button>
+                {/* Add your own logic here for logout */}
+                <Button onClick={() => {}} color="inherit">Logout</Button> 
               </>
             ) : (
               <>

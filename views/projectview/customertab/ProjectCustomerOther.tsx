@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { List, ListItemButton, ListItemText, Paper, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { getAuth } from 'firebase/auth';
 
 interface Customer {
   firstname: string;
@@ -18,18 +17,11 @@ const ProjectCustomerOther: React.FC = () => {
 
   useEffect(() => {
     const fetchCustomers = async () => {
-      const auth = getAuth();
-      if (auth.currentUser) {
-        auth.currentUser.getIdToken(true).then(async (token) => {
-          try {
-            const response = await axios.get('/othercustomer', {
-              headers: { Authorization: `Bearer ${token}` },
-            });
-            setCustomers(response.data);
-          } catch (error) {
-            console.error('An error occurred while fetching the customers:', error);
-          }
-        });
+      try {
+        const response = await axios.get('/othercustomer');
+        setCustomers(response.data);
+      } catch (error) {
+        console.error('An error occurred while fetching the customers:', error);
       }
     };
 

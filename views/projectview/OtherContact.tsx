@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { List, ListItem, ListItemButton, ListItemText, Typography } from '@mui/material';
 import UsersView from './UserView';
-import { Users } from './UserView'; // Adjust the path as needed
+import { UserInfo } from './ProjectInterface'; // Adjust the path as needed
 
 interface OtherCustomerProps {
-  otherCustomers?: Array<Users>;
+  otherCustomers?: Array<UserInfo>;
 }
 
 const OtherCustomer: React.FC<OtherCustomerProps> = ({ otherCustomers }) => {

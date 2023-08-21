@@ -5,7 +5,7 @@ import ProjectSideBar from './ProjectSideBar';
 import AddProject from '../addinformation/addproject/AddProject';
 import AddWellLocation from '../addinformation/addproject/AddWellLocation';
 import AddCustomer from '../addinformation/addcustomer/AddCustomer';
-import WellActivity from '../addinformation/addproject/WellActivity';
+import WellActivity from '../addinformation/addproject/ServiceRecord';
 import { FormState, initialCustomerInfo, initialAddress, initialWell, initialServiceRecord } from '../addinformation/addcustomer/interfaces';
 import { Box } from '@mui/system';
 import { Paper } from '@mui/material';

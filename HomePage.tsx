@@ -1,19 +1,8 @@
-import React, { useContext, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from './context/AuthContext'; // Adjust the path to the correct location
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { Container, Typography, Button, Grid, Paper } from '@mui/material';
 
 const HomePage: React.FC = () => {
-  const auth = useContext(AuthContext);
-  const currentUser = auth ? auth.currentUser : null;
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (currentUser) {
-      navigate('/dashboard');
-    }
-  }, [currentUser, navigate]);
-
   return (
     <Container>
       <Grid container spacing={3}>

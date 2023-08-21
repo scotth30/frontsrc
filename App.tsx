@@ -7,7 +7,7 @@ import LoginPage from './components/login/LoginPage';
 import CustomNavbar from './components/navbar/CustomNavbar';
 import Dashboard from './views/dashboard/Dashboard';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import PictureGenerator from './components/picture/PictureGenerator';
+
 import { theme }from './theme';
 
 
@@ -24,7 +24,6 @@ const App: React.FC = () => {
           <div className="content-wrapper">
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route path="/generatePicture" element={<PictureGenerator />} />
               <Route path="/signup" element={<SignUpPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/dashboard/*" element={<Dashboard />} />

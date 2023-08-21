@@ -4,16 +4,7 @@ import { Typography, Alert, Button } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
 import { validationSchema, createFormData, FormData, stateInitials } from '../../utils/formUtils';
 import axios from 'axios';
-import { getAuth, createUserWithEmailAndPassword, getIdToken } from 'firebase/auth'; // Updated import
-import { initializeApp } from 'firebase/app';
 import { ContainerStyle, ButtonContainerStyle, FormFieldsContainerStyle, FormFieldStyle, StyledTextField } from '../../styles/SignUpPage.styles';
-import { firebaseConfig } from '../../firebaseConfig';
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-
-// Initialize Firebase Authentication
-const auth = getAuth(app);
 
 const SignUpPage: FC = () => {
 
@@ -27,21 +18,10 @@ const SignUpPage: FC = () => {
       setSubmitting(true);
       const { email, password, confirmPassword, ...restOfValues } = values;
       try {
-        // Create user in Firebase
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
-
-        // Get the ID token from Firebase
-        const token = await getIdToken(user);
-
-        // Send token and other information to the backend
-        const response = await axios.post(backendURL + '/register', { uid: user.uid, email, password, ...restOfValues }, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
-        if (response.status === 201 && response.data.token) {
-          localStorage.setItem('token', response.data.token);
+        // Send user information to the backend
+        const response = await axios.post(backendURL + '/register', { email, password, ...restOfValues });
+        if (response.status === 201) {
+          setErrorMessage(null);
         } else {
           setErrorMessage(response.data.message || 'Registration failed');
         }

@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { CustomerInfo, Address, FormProps } from './interfaces';
 import { Container, TextField, Typography, Grid, Button } from '@mui/material';
-import { getAuth } from 'firebase/auth'; // Updated import
 
 const AddCustomer: React.FC<FormProps> = ({ formState, setFormState }) => {
   const [addingMailingAddress, setAddingMailingAddress] = useState(false);
   const backendURL = import.meta.env.VITE_REACT_APP_BACKEND_URL;
-  const auth = getAuth(); // Create an auth instance using 'getAuth'
 
   const handleChange = (field: keyof CustomerInfo, value: string) => {
     setFormState((prevState) => ({
@@ -30,34 +28,25 @@ const AddCustomer: React.FC<FormProps> = ({ formState, setFormState }) => {
   };
 
   const handleSubmit = async () => {
-    const user = auth.currentUser; // Access current user through 'auth'
-    if (!user) return;
+    try {
+      const response = await fetch(backendURL + '/addcustomer', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formState.customer),
+      });
 
-    user.getIdToken(true).then(async (idToken: string) => { // Specify type for 'idToken'
-      try {
-        const response = await fetch(backendURL + '/addcustomer', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${idToken}`,
-          },
-          body: JSON.stringify(formState.customer),
-        });
+      const data = await response.json();
 
-        const data = await response.json();
-
-        if (response.ok) {
-          const newToken = data.token;
-          console.log('New token received:', newToken);
-        } else {
-          console.error('Error adding customer:', data.message);
-        }
-      } catch (error) {
-        console.error('Network error:', error);
+      if (response.ok) {
+        console.log('Customer added successfully:', data);
+      } else {
+        console.error('Error adding customer:', data.message);
       }
-    }).catch((error: Error) => { // Specify type for 'error'
-      console.error('Error getting token:', error);
-    });
+    } catch (error) {
+      console.error('Network error:', error);
+    }
   };
 
   return (

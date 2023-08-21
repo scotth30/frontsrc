@@ -1,18 +1,12 @@
-// AddProject.tsx
-
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import AddCustomer from '../addcustomer/AddCustomer';
 import AddWellLocation from './AddWellLocation';
-import WellActivity from './WellActivity';
+import WellActivity from './ServiceRecord';
 import { FormState, initialCustomerInfo, initialAddress, initialWell, initialServiceRecord } from '../addcustomer/interfaces';
-import { AuthContext } from '../../../context/AuthContext';
 import { Container, Grid, Box } from '@mui/material';
 
-
 const AddProject: React.FC = () => {
-  const auth = useContext(AuthContext);
-  const currentUser = auth ? auth.currentUser : null;
 
   const [formState, setFormState] = useState<FormState>({
     customer: { info: initialCustomerInfo, billingaddress: initialAddress, mailingaddress: initialAddress },
@@ -25,14 +19,8 @@ const AddProject: React.FC = () => {
   const [open, setOpen] = useState(true); // Maintain the state for the modal
 
   const handleSubmit = async () => {
-    if (!currentUser) {
-      console.error('User not logged in.');
-      return;
-    }
-
     try {
-      const idToken = await currentUser.getIdToken();
-      const response = await axios.post(backendURL +'/addProject', formState, { headers: { Authorization: `Bearer ` } });
+      const response = await axios.post(backendURL +'/addProject', formState);
       console.log(response.data);
       setOpen(false); // Close the modal after successful submission
     } catch (error) {

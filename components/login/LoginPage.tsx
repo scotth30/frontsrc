@@ -1,6 +1,4 @@
 import React, { useState, FormEvent } from 'react';
-import { GoogleAuthProvider, FacebookAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
-import { auth } from '../../firebaseConfig';
 import { Google, Facebook, AlternateEmail } from '@mui/icons-material';
 import { Container, Typography, Divider, IconButton, Paper } from '@mui/material';
 import { ErrorText, StyledButton, StyledTextField } from '../../styles/LoginPage.styles';
@@ -18,41 +16,15 @@ const LoginPage: React.FC = () => {
 
   const handleEmailPasswordLogin = async (e: FormEvent) => {
     e.preventDefault();
-    try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      if (userCredential.user) {
-        handleLoginSuccess();
-      }
-    } catch (error) {
-      console.error('Error during custom email/password login:', (error as Error).message);
-      setLoginError('An error occurred during login. Please try again later.');
-    }
+    // Add your own logic here for email/password login
   };
 
   const handleGoogleLogin = async () => {
-    try {
-      const provider = new GoogleAuthProvider();
-      const userCredential = await signInWithPopup(auth, provider);
-      if (userCredential.user) {
-        handleLoginSuccess();
-      }
-    } catch (error) {
-      console.error('Error during Google login:', (error as Error).message);
-      setLoginError('An error occurred during login. Please try again later.');
-    }
+    // Add your own logic here for Google login
   };
 
   const handleFacebookLogin = async () => {
-    try {
-      const provider = new FacebookAuthProvider();
-      const userCredential = await signInWithPopup(auth, provider);
-      if (userCredential.user) {
-        handleLoginSuccess();
-      }
-    } catch (error) {
-      console.error('Error during Facebook login:', (error as Error).message);
-      setLoginError('An error occurred during login. Please try again later.');
-    }
+    // Add your own logic here for Facebook login
   };
 
   return (

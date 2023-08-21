@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { List, ListItemButton, ListItemText, Paper, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { getAuth } from 'firebase/auth';
 
 interface Project {
   projectname: string;
@@ -18,18 +17,11 @@ const CustomerRelatedProject: React.FC = () => {
 
   useEffect(() => {
     const fetchProjects = async () => {
-      const auth = getAuth();
-      if (auth.currentUser) {
-        auth.currentUser.getIdToken(true).then(async (token) => {
-          try {
-            const response = await axios.get('/customerproject', {
-              headers: { Authorization: `Bearer ${token}` },
-            });
-            setProjects(response.data);
-          } catch (error) {
-            console.error('Error fetching projects:', error);
-          }
-        });
+      try {
+        const response = await axios.get('/customerproject');
+        setProjects(response.data);
+      } catch (error) {
+        console.error('Error fetching projects:', error);
       }
     };
 
